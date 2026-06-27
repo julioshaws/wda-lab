@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — WDA Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0D1A0F;--forest:#1B3A22;--moss:#2E5E38;--sage:#607A5F;--gold:#BF8C3A;--amber:#D4A84B;--sand:#E8DCC8;--cream:#F6F2EA;--white:#FDFCF9;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Jost',sans-serif;color:var(--ink);background:var(--white);}
+  header{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 60px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,26,15,0.96);}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .nav-logo-mark{width:36px;height:36px;border:1.5px solid var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--amber);}
+  .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--amber);letter-spacing:0.04em;}
+  nav{display:flex;align-items:center;gap:8px;}
+  .nav-item{position:relative;}
+  .nav-link{display:flex;align-items:center;gap:5px;padding:10px 16px;font-size:13px;color:rgba(255,255,255,0.75);text-decoration:none;background:none;border:none;font-family:'Jost',sans-serif;cursor:pointer;transition:color 0.3s;}
+  .nav-link:hover{color:#fff;}
+  .nav-link svg{width:10px;height:10px;transition:transform 0.3s;}
+  .nav-item:hover .nav-link svg{transform:rotate(180deg);}
+  .dropdown{position:absolute;top:calc(100%+8px);left:0;background:rgba(13,26,15,0.98);border:1px solid rgba(255,255,255,0.08);min-width:200px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all 0.3s;}
+  .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+  .dropdown a{display:block;padding:12px 20px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.2s,color 0.2s;}
+  .dropdown a:last-child{border-bottom:none;}
+  .dropdown a:hover{background:rgba(191,140,58,0.12);color:var(--amber);}
+  .nav-cta{background:var(--gold);color:var(--ink)!important;padding:10px 24px!important;font-weight:500;}
+  .nav-cta:hover{background:var(--amber)!important;}
+  .page-hero{padding:160px 60px 100px;background:var(--forest);position:relative;overflow:hidden;}
+  .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%, rgba(46,94,56,0.3) 0%, transparent 65%);}
+  .page-hero-tag{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+  .page-hero-tag::before{content:'';width:28px;height:1px;background:var(--amber);}
+  .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,86px);font-weight:700;line-height:1;color:#fff;position:relative;z-index:1;}
+  .page-hero h1 em{font-style:italic;color:var(--amber);}
+  .page-hero p{font-size:16px;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.55);max-width:560px;margin-top:24px;position:relative;z-index:1;}
+  /* TEAM LAYOUT */
+  .team-section{padding:100px 60px;background:var(--sand);}
+  .team-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:72px;}
+  h2.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,60px);font-weight:700;line-height:1.05;color:var(--ink);}
+  h2.section-title em{font-style:italic;color:var(--moss);}
+  .section-tag{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+  .section-tag::before{content:'';width:28px;height:1px;background:var(--sage);}
+  .intro-right{font-size:16px;font-weight:300;line-height:1.85;color:rgba(13,26,15,0.55);}
+  .team-card{display:grid;grid-template-columns:2fr 5fr;background:var(--white);box-shadow:0 6px 40px rgba(13,26,15,0.08);overflow:hidden;margin-bottom:2px;transition:transform 0.4s,box-shadow 0.4s;}
+  .team-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(13,26,15,0.12);}
+  .team-photo{background:linear-gradient(160deg,var(--forest),var(--moss));min-height:480px;position:relative;display:flex;align-items:flex-end;padding:24px;}
+  .team-initial{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-family:'Cormorant Garamond',serif;font-size:130px;font-weight:700;color:rgba(255,255,255,0.07);line-height:1;user-select:none;}
+  .team-badge{position:relative;z-index:1;background:rgba(13,26,15,0.65);backdrop-filter:blur(6px);padding:7px 14px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);}
+  .team-info{padding:64px 60px;display:flex;flex-direction:column;justify-content:center;}
+  .team-role{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:10px;font-weight:500;}
+  .team-name{font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:700;color:var(--ink);line-height:1;margin-bottom:28px;}
+  .team-bio{font-size:14px;font-weight:300;line-height:1.9;color:rgba(13,26,15,0.55);}
+  .team-bio+.team-bio{margin-top:14px;}
+  .team-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;}
+  .tag{background:rgba(46,94,56,0.08);border:1px solid rgba(46,94,56,0.15);color:var(--moss);font-size:11px;letter-spacing:0.06em;padding:5px 12px;font-weight:400;}
+  footer{background:var(--ink);padding:48px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;border-top:1px solid rgba(255,255,255,0.05);}
+  .footer-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--amber);letter-spacing:0.04em;margin-bottom:6px;}
+  .footer-info{font-size:12px;font-weight:300;color:rgba(255,255,255,0.25);line-height:1.9;}
+  .footer-nav{display:flex;gap:28px;flex-wrap:wrap;}
+  .footer-nav a{font-size:12px;letter-spacing:0.08em;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.3s;text-transform:uppercase;}
+  .footer-nav a:hover{color:var(--amber);}
+  @media(max-width:900px){header{padding:0 24px;}.page-hero{padding:120px 24px 72px;}.team-section{padding:72px 24px;}.team-intro-grid,.team-card{grid-template-columns:1fr;}.team-photo{min-height:280px;}footer{flex-direction:column;padding:40px 24px;}nav{display:none;}}
+
+  /* ─── TABLET ─── */
+@media(max-width:1024px) and (min-width:601px){
+    header { padding:0 24px; }
+    .hero { height:55vw; min-height:300px; }
+    .intro-band { padding:48px 24px; }
+    .team-section { padding:64px 24px; }
+    .split-block, .team-intro, .vision-inner, .team-card, .contact-cta { grid-template-columns:1fr; }
+    .split-img { min-height:280px; }
+    .services-cards { grid-template-columns:1fr 1fr; }
+    footer { flex-direction:column; align-items:flex-start; padding:40px 24px; }
+    nav { display:flex; }
+  }
+
+/* ─── MOBILE ─── */
+@media(max-width:600px){
+    header { padding:0 24px; }
+    .hero { height:55vw; min-height:300px; }
+    .intro-band { padding:48px 24px; }
+    .team-section { padding:64px 24px; }
+    .split-block, .team-intro, .vision-inner, .team-card, .contact-cta { grid-template-columns:1fr; }
+    .split-img { min-height:280px; }
+    .services-cards { grid-template-columns:1fr; }
+    footer { flex-direction:column; align-items:flex-start; padding:40px 24px; }
+    nav { display:none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="WDA Lab" style="height:48px;width:auto;object-fit:contain;border-radius:12%;">
+  </a>
+  <nav>
+    <div class="nav-item">
+      <button class="nav-link">
+        Services
+        <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="dropdown">
+         <a href="index.html">Home</a>
+        <a href="services.html#annotation">High-Fidelity Annotation</a>
+        <a href="services.html#data">Data Entry &amp; Management</a>
+        <a href="services.html#analysis">Data Analysis</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <button class="nav-link">
+        About
+        <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="dropdown">
+        <a href="team.html">Our Team</a>
+        <a href="story.html">Our Story</a>
+        <a href="vision.html">Our Vision</a>
+      </div>
+    </div>
+    <a href="contact.html" class="nav-link nav-cta">Contact Us</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <p class="page-hero-tag">Our Team</p>
+  <h1>The people<br>behind the <em>precision</em></h1>
+  <p>A collaborative network of wildlife data specialists, ecologists, and conservation analysts — working alongside your team, not just for it.</p>
+</div>
+
+<section class="team-section">
+  <div class="team-intro-grid">
+    <div>
+      <p class="section-tag">Meet Our Team</p>
+      <h2 class="section-title">Built on field knowledge <em>& expertise</em></h2>
+    </div>
+    <p class="intro-right">WDA Lab brings together technical expertise and deep field knowledge to support your project with the depth and dedication it deserves. Each team member brings hands-on conservation experience from some of Africa's most significant ecosystems.</p>
+  </div>
+
+ <!-- ══ FOUNDER PROFILE ══ -->
+<section style="background:var(--white);padding:100px 60px;">
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;">
+
+    <!-- LEFT: photo + badge -->
+    <div style="position:sticky;top:40px;text-align:center;">
+      <div style="width:200px;height:200px;border-radius:50%;background:linear-gradient(160deg,var(--forest),var(--moss));margin:0 auto 24px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 20px 60px rgba(13,26,15,0.2);">
+        <img src="images/julius.jpg" alt="Julius Mmbaga" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:700;color:rgba(255,255,255,0.3);position:absolute;"></span>
+      </div>
+      <div style="background:var(--forest);padding:16px 20px;text-align:left;">
+        <span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber);font-weight:500;display:block;margin-bottom:4px;">Founder & CEO</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;display:block;">Julius Mmbaga</span>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px;justify-content:center;flex-wrap:wrap;">
+        <span style="background:rgba(46,94,56,0.1);border:1px solid rgba(46,94,56,0.2);color:var(--moss);font-size:11px;letter-spacing:0.06em;padding:4px 12px;">English</span>
+        <span style="background:rgba(46,94,56,0.1);border:1px solid rgba(46,94,56,0.2);color:var(--moss);font-size:11px;letter-spacing:0.06em;padding:4px 12px;">Swahili</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: content -->
+    <div>
+      <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:8px;">Founder & CEO: WDA-Lab · Arusha, Tanzania</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:700;line-height:1.05;color:var(--ink);margin-bottom:32px;">Julius <em style="font-style:italic;color:var(--moss);">Mmbaga</em></h2>
+
+      <div style="border-left:2px solid var(--gold);padding:24px 32px;background:rgba(191,140,58,0.05);margin-bottom:36px;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;font-weight:400;line-height:1.6;color:var(--forest);">"Conservation without data is guesswork. My mission is to make sure the people protecting Africa's wildlife never have to guess."</p>
+      </div>
+
+      <div style="font-size:15px;font-weight:300;line-height:1.95;color:rgba(13,26,15,0.6);">
+        <p>Julius Mmbaga is the founder and CEO of WildData Annotation Lab, a conservation data company he built from the ground up in Arusha, Tanzania. He provides overall strategic leadership and drives the company's mission — overseeing client relationships, guiding project delivery, and ensuring every dataset WDA-Lab produces meets the highest standards of accuracy and scientific rigour. Julius brings a rare combination of field-level wildlife expertise and data systems knowledge to his role — making him uniquely positioned to lead a company at the intersection of conservation science and precision data services.</p>
+      </div>
+      <div style="font-size:15px;font-weight:300;line-height:1.95;color:rgba(13,26,15,0.6);">
+        <p style="margin-top:18px;">He graduated from the <strong style="color:var(--ink);font-weight:500;">College of African Wildlife Management, Mweka</strong> in 2021, and later honed his data expertise at the <strong style="color:var(--ink);font-weight:500;">Center for Research Cooperation (CRC)</strong> in Tanzania under the mentorship of Howard Frederick. In 2023 he founded WDA-Lab, and has since personally led projects across five countries — processing over one million wildlife images.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- ══ PENDO PROFILE ══ -->
+<section style="background:var(--cream);padding:100px 60px;">
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:80px;align-items:start;">
+
+    <!-- LEFT: content -->
+    <div>
+      <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:8px;">Chief Technology Officer — WDA Lab · Arusha, Tanzania</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:700;line-height:1.05;color:var(--ink);margin-bottom:32px;">Pendo <em style="font-style:italic;color:var(--moss);">Kipara</em></h2>
+
+      <div style="border-left:2px solid var(--gold);padding:24px 32px;background:rgba(191,140,58,0.07);margin-bottom:36px;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;font-weight:400;line-height:1.6;color:var(--forest);">"Conservation data is only as powerful as the systems behind it. My job is to make sure those systems never let the mission down."</p>
+      </div>
+
+      <div style="font-size:15px;font-weight:300;line-height:1.95;color:rgba(13,26,15,0.6);">
+        <p>Pendo Kipara is the Chief Technology Officer of Wild Data Annotation Lab, and the driving force behind the technical infrastructure that powers every project WDA Lab delivers. As the team's technology lead, Pendo ensures that every system, software tool, and digital workflow is configured, maintained, and ready to perform — so that when conservation data arrives, the team can get to work immediately.</p>
+        <p style="margin-top:18px;">A graduate of the <strong style="color:var(--ink);font-weight:500;">Kilimanjaro International Institute for Telecommunications, Electronics and Computers</strong>, Pendo brings a strong technical foundation to a field that increasingly depends on robust digital infrastructure. Her role at WDA-Lab spans software management, systems integration, and technical readiness — ensuring that annotation platforms, data management tools, and analysis software are always operational and optimized for the team's conservation work.</p>
+        <p style="margin-top:18px;">Pendo is the reason WDA-Lab can consistently deliver <strong style="color:var(--ink);font-weight:500;">on time and at scale</strong> — her behind-the-scenes technical leadership is what turns field data into research-ready outputs without interruption.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: photo + badge -->
+    <div style="position:sticky;top:40px;text-align:center;">
+      <div style="width:200px;height:200px;border-radius:50%;background:linear-gradient(160deg,var(--moss),var(--sage));margin:0 auto 24px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 20px 60px rgba(13,26,15,0.2);position:relative;">
+        <img src="images/pendo.jpg" alt="Pendo Kipara" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:700;color:rgba(255,255,255,0.3);position:absolute;"></span>
+      </div>
+      <div style="background:var(--forest);padding:16px 20px;text-align:left;">
+        <span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber);font-weight:500;display:block;margin-bottom:4px;">Chief Technology Officer</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;display:block;">Pendo Kipara</span>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px;justify-content:center;flex-wrap:wrap;">
+        <span style="background:rgba(46,94,56,0.1);border:1px solid rgba(46,94,56,0.2);color:var(--moss);font-size:11px;letter-spacing:0.06em;padding:4px 12px;">English</span>
+        <span style="background:rgba(46,94,56,0.1);border:1px solid rgba(46,94,56,0.2);color:var(--moss);font-size:11px;letter-spacing:0.06em;padding:4px 12px;">Swahili</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WENCESLAUS PROFILE ══ -->
+<section style="background:var(--white);padding:100px 60px;">
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;">
+
+    <!-- LEFT: photo + badge -->
+    <div style="position:sticky;top:40px;text-align:center;">
+      <div style="width:200px;height:200px;border-radius:50%;background:linear-gradient(160deg,var(--forest),var(--moss));margin:0 auto 24px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 20px 60px rgba(13,26,15,0.2);position:relative;">
+        <img src="images/wence1.jpg" alt="Wenceslaus Magesa" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:700;color:rgba(255,255,255,0.3);position:absolute;"></span>
+      </div>
+      <div style="background:var(--forest);padding:16px 20px;text-align:left;">
+        <span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber);font-weight:500;display:block;margin-bottom:4px;">Operations Manager</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;display:block;">Wenceslaus Magesa</span>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px;justify-content:center;flex-wrap:wrap;">
+        <span style="background:rgba(46,94,56,0.1);border:1px solid rgba(46,94,56,0.2);color:var(--moss);font-size:11px;letter-spacing:0.06em;padding:4px 12px;">English</span>
+        <span style="background:rgba(46,94,56,0.1);border:1px solid rgba(46,94,56,0.2);color:var(--moss);font-size:11px;letter-spacing:0.06em;padding:4px 12px;">Swahili</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: content -->
+    <div>
+      <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:8px;">Operations Manager — WDA Lab · Arusha, Tanzania</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:700;line-height:1.05;color:var(--ink);margin-bottom:32px;">Wenceslaus <em style="font-style:italic;color:var(--moss);">Magesa</em></h2>
+
+      <div style="border-left:2px solid var(--gold);padding:24px 32px;background:rgba(191,140,58,0.05);margin-bottom:36px;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;font-weight:400;line-height:1.6;color:var(--forest);">"Good operations are invisible — everything just works. That is what I strive for every single day."</p>
+      </div>
+
+      <div style="font-size:15px;font-weight:300;line-height:1.95;color:rgba(13,26,15,0.6);">
+        <p>Wenceslaus Magesa is the Operations Manager at WildData Annotation Lab, responsible for ensuring that every project runs smoothly from start to finish. A graduate of <strong style="color:var(--ink);font-weight:500;">Sokoine University of Agriculture</strong> with a Bachelor's degree in Wildlife Management, Wenceslaus brings both scientific grounding and practical field experience to his role. His hands-on background in <strong style="color:var(--ink);font-weight:500;">quantitative and qualitative field data collection</strong> gives him a deep understanding of how conservation data is gathered in the field — and what it takes to process it accurately and efficiently. Working closely with Julius Mmbaga, he oversees day-to-day operations, coordinates project workflows, and ensures that WDA-Lab consistently delivers on its commitments to conservation partners across Africa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div style="text-align:center;">
+    <div class="footer-info">
+      P.O. Box 2123, Arusha, Tanzania &nbsp;|&nbsp; +255 (0) 71 724 0523 &nbsp;|&nbsp; info@wda-lab.com &nbsp;|&nbsp; Reg. No. 631498
+    </div>
+  </div>
+  <nav class="footer-nav">
+    <a href="privacy.html" style="text-transform:capitalize;">Privacy Policy</a>
+  </nav>
+  <div class="footer-info" style="margin-top:8px;">&copy; 2026 WDA-Lab. All rights reserved.</div>
+</footer>
+</body>
+</html>

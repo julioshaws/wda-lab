@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story — WDA Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0D1A0F;--forest:#1B3A22;--moss:#2E5E38;--sage:#607A5F;--gold:#BF8C3A;--amber:#D4A84B;--sand:#E8DCC8;--cream:#F6F2EA;--white:#FDFCF9;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Jost',sans-serif;color:var(--ink);background:var(--white);overflow-x:hidden;}
+
+  /* ─── HEADER ─── */
+  header{width:100%;background:rgba(13,26,15,0.97);padding:0 60px;height:80px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1000;overflow:visible;}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--amber);letter-spacing:0.04em;}
+  nav{display:flex;align-items:center;gap:8px;}
+  .nav-item{position:relative;}
+  .nav-link{display:flex;align-items:center;gap:5px;padding:10px 16px;font-size:13px;font-weight:400;letter-spacing:0.05em;color:rgba(255,255,255,0.85);text-decoration:none;border-radius:2px;transition:color 0.3s;cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;}
+  .nav-link:hover{color:#fff;}
+  .nav-link svg{width:10px;height:10px;transition:transform 0.3s;}
+  .nav-item:hover .nav-link svg{transform:rotate(180deg);}
+  .dropdown{position:absolute;top:calc(100% + 4px);left:0;background:rgba(13,26,15,0.98);border:1px solid rgba(255,255,255,0.08);min-width:210px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all 0.3s;border-radius:2px;overflow:hidden;z-index:200;}
+  .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+  .dropdown a{display:block;padding:12px 20px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;letter-spacing:0.03em;transition:background 0.2s,color 0.2s;border-bottom:1px solid rgba(255,255,255,0.04);}
+  .dropdown a:last-child{border-bottom:none;}
+  .dropdown a:hover{background:rgba(191,140,58,0.12);color:var(--amber);}
+  .nav-cta{background:var(--gold);color:var(--ink)!important;padding:10px 24px!important;font-weight:500;border-radius:2px;transition:background 0.3s,transform 0.2s!important;}
+  .nav-cta:hover{background:var(--amber)!important;transform:translateY(-1px);}
+
+  /* ─── PAGE HERO ─── */
+  .page-hero{
+    background:var(--ink);padding:100px 60px 80px;
+    position:relative;overflow:hidden;
+  }
+  .page-hero::before{
+    content:'';position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 60% 70% at 80% 50%, rgba(46,94,56,0.2) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 40% at 10% 80%, rgba(191,140,58,0.07) 0%, transparent 60%);
+  }
+  .page-hero-inner{position:relative;z-index:1;max-width:760px;}
+  .section-tag{font-size:11px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+  .section-tag::before{content:'';display:block;width:28px;height:1px;}
+  .tag-amber{color:var(--amber);}
+  .tag-amber::before{background:var(--amber);}
+  .tag-sage{color:var(--sage);}
+  .tag-sage::before{background:var(--sage);}
+  .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,96px);font-weight:700;line-height:0.95;color:#fff;margin-bottom:28px;}
+  .page-hero h1 em{font-style:italic;color:var(--amber);}
+  .page-hero p{font-size:17px;font-weight:300;line-height:1.85;color:rgba(255,255,255,0.5);max-width:580px;}
+
+  /* ─── PULL QUOTE BAND ─── */
+  .pull-band{
+    background:var(--forest);padding:72px 60px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .pull-quote{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(24px,3.5vw,40px);font-style:italic;font-weight:400;
+    line-height:1.45;color:rgba(255,255,255,0.9);
+    max-width:860px;text-align:center;
+    border-left:none;
+    position:relative;padding:0 40px;
+  }
+  .pull-quote::before,.pull-quote::after{
+    content:'"';font-family:'Cormorant Garamond',serif;
+    font-size:120px;color:var(--amber);opacity:0.2;
+    position:absolute;line-height:1;
+  }
+  .pull-quote::before{top:-20px;left:0;}
+  .pull-quote::after{content:'"';bottom:-60px;right:0;}
+
+  /* ─── STORY SECTIONS ─── */
+  .story-section{padding:100px 60px;}
+  .story-grid{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;}
+  .story-grid.reverse{grid-template-columns:2fr 1fr;}
+  .story-chapter{
+    position:sticky;top:40px;
+  }
+  .chapter-num{
+    font-family:'Cormorant Garamond',serif;font-size:120px;font-weight:700;
+    color:rgba(13,26,15,0.06);line-height:1;margin-bottom:-20px;
+  }
+  .chapter-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.1;
+    color:var(--ink);margin-bottom:16px;
+  }
+  .chapter-title em{font-style:italic;color:var(--moss);}
+  .chapter-sub{
+    font-size:12px;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--sage);font-weight:500;
+  }
+  .story-body p{
+    font-size:16px;font-weight:300;line-height:1.95;
+    color:rgba(13,26,15,0.65);margin-bottom:24px;
+  }
+  .story-body p:last-child{margin-bottom:0;}
+  .story-body strong{color:var(--ink);font-weight:500;}
+  .story-highlight{
+    border-left:2px solid var(--gold);
+    padding:24px 32px;
+    background:rgba(191,140,58,0.05);
+    margin:32px 0;
+  }
+  .story-highlight p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px;font-style:italic;font-weight:400;
+    line-height:1.6;color:var(--forest);margin-bottom:0 !important;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline-section{background:var(--sand);padding:100px 60px;}
+  .timeline-header{margin-bottom:64px;}
+  .timeline{position:relative;max-width:900px;margin:0 auto;}
+  .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(13,26,15,0.12);transform:translateX(-50%);}
+  .timeline-item{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:60px;position:relative;}
+  .timeline-item:last-child{margin-bottom:0;}
+  .timeline-dot{position:absolute;left:50%;top:8px;width:12px;height:12px;border-radius:50%;background:var(--amber);border:2px solid var(--sand);transform:translateX(-50%);}
+  .timeline-left{text-align:right;padding-right:24px;}
+  .timeline-right{padding-left:24px;}
+  .timeline-year{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--amber);line-height:1;margin-bottom:8px;}
+  .timeline-event{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.2;}
+  .timeline-desc{font-size:13px;font-weight:300;line-height:1.8;color:rgba(13,26,15,0.55);}
+
+  /* ─── VALUES ─── */
+  .values-section{background:var(--ink);padding:100px 60px;position:relative;overflow:hidden;}
+  .values-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 80% 50%, rgba(46,94,56,0.15) 0%, transparent 65%);}
+  .values-inner{position:relative;z-index:1;}
+  .values-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:64px;}
+  .values-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:700;line-height:1.05;color:#fff;}
+  .values-section h2 em{font-style:italic;color:var(--amber);}
+  .values-right-text{font-size:15px;font-weight:300;line-height:1.85;color:rgba(255,255,255,0.45);}
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);}
+  .value-card{background:var(--ink);padding:44px 36px;transition:background 0.4s;}
+  .value-card:hover{background:#111f13;}
+  .value-icon{width:36px;height:36px;margin-bottom:20px;opacity:0.5;}
+  .value-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--amber);margin-bottom:12px;line-height:1.2;}
+  .value-desc{font-size:13px;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.4);}
+
+  /* ─── CTA ─── */
+  .cta-section{background:var(--gold);padding:90px 60px;display:flex;justify-content:space-between;align-items:center;gap:48px;}
+  .cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.5vw,60px);font-weight:700;color:var(--ink);line-height:1.05;}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.3s;cursor:pointer;border:none;}
+  .btn-dark{background:var(--ink);color:var(--amber);padding:16px 44px;white-space:nowrap;}
+  .btn-dark:hover{background:var(--forest);transform:translateY(-2px);}
+  .btn-forest{background:var(--moss);color:#fff;padding:14px 34px;}
+  .btn-forest:hover{background:var(--forest);transform:translateY(-2px);}
+
+  /* ─── FOOTER ─── */
+  footer{background:var(--ink);padding:48px 60px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:24px;border-top:1px solid rgba(255,255,255,0.05);}
+  .footer-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--amber);letter-spacing:0.04em;margin-bottom:6px;}
+  .footer-info{font-size:12px;font-weight:300;color:rgba(255,255,255,0.25);line-height:1.9;letter-spacing:0.04em;}
+  .footer-nav{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;}
+  .footer-nav a{font-size:12px;font-weight:400;letter-spacing:0.08em;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.3s;text-transform:uppercase;}
+  .footer-nav a:hover{color:var(--amber);}
+
+   /* ─── TABLET ─── */
+@media(max-width:1024px) and (min-width:601px){
+    header { padding:0 24px; }
+    .hero { height:55vw; min-height:300px; }
+    .intro-band { padding:48px 24px; }
+    .team-section { padding:64px 24px; }
+    .split-block, .team-intro, .vision-inner, .team-card, .contact-cta { grid-template-columns:1fr; }
+    .split-img { min-height:280px; }
+    .services-cards { grid-template-columns:1fr 1fr; }
+    footer { flex-direction:column; align-items:flex-start; padding:40px 24px; }
+    nav { display:flex; }
+  }
+
+/* ─── MOBILE ─── */
+@media(max-width:600px){
+    header { padding:0 24px; }
+    .hero { height:55vw; min-height:300px; }
+    .intro-band { padding:48px 24px; }
+    .team-section { padding:64px 24px; }
+    .split-block, .team-intro, .vision-inner, .team-card, .contact-cta { grid-template-columns:1fr; }
+    .split-img { min-height:280px; }
+    .services-cards { grid-template-columns:1fr; }
+    footer { flex-direction:column; align-items:flex-start; padding:40px 24px; }
+    nav { display:none; }
+  }
+  @media(max-width:600px){
+    header{padding:0 24px;}
+    nav{display:none;}
+    .page-hero{padding:60px 24px;}
+    .pull-band{padding:48px 24px;}
+    .story-section,.timeline-section,.values-section{padding:60px 24px;}
+    .story-grid,.story-grid.reverse,.values-header{grid-template-columns:1fr;}
+    .story-chapter{position:static;}
+    .chapter-num{font-size:80px;}
+    .timeline::before{left:20px;}
+    .timeline-item{grid-template-columns:1fr;}
+    .timeline-dot{left:20px;}
+    .timeline-left{text-align:left;padding-right:0;padding-left:48px;}
+    .timeline-right{padding-left:48px;}
+    .values-grid{grid-template-columns:1fr;}
+    .cta-section{flex-direction:column;align-items:flex-start;padding:60px 24px;}
+    footer{padding:40px 24px;}
+  }
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="WDA Lab" style="height:48px;width:auto;object-fit:contain;border-radius:12px;">
+  </a>
+  <nav>
+    <div class="nav-item">
+      <button class="nav-link">
+        Services
+        <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="dropdown">
+        <a href="index.html">Home</a>
+        <a href="services.html#annotation">High-Fidelity Annotation</a>
+        <a href="services.html#data">Data Entry &amp; Management</a>
+        <a href="services.html#analysis">Evidence-Based Analysis</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <button class="nav-link">
+        About
+        <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="dropdown">
+        <a href="team.html">Our Team</a>
+        <a href="story.html">Our Story</a>
+        <a href="vision.html">Our Vision</a>
+      </div>
+    </div>
+    <a href="contact.html" class="nav-link nav-cta">Contact Us</a>
+  </nav>
+</header>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="section-tag tag-amber">Our Story</p>
+    <h1>From a village in<br><em>Kilimanjaro</em><br>to a continent's data.</h1>
+    <p>A boy who witnessed the cost of human-wildlife conflict grew up to build the digital infrastructure that helps prevent it. This is the story of WDA-Lab.</p>
+  </div>
+</section>
+
+<!-- ══ PULL QUOTE ══ -->
+<div class="pull-band">
+  <p class="pull-quote">I knew that blaming either the farmers or the animals wouldn't solve the problem. The true missing link was awareness — and I wanted to be part of the solution.</p>
+</div>
+
+<!-- ══ CHAPTER 1 ══ -->
+<section class="story-section" style="background:var(--cream);">
+  <div class="story-grid">
+    <div class="story-chapter">
+      <div class="chapter-num">01</div>
+      <p class="chapter-sub">The Beginning</p>
+      <h2 class="chapter-title">Conflict in the shadow of <em>Kilimanjaro</em></h2>
+    </div>
+    <div class="story-body">
+      <p>Growing up in the Kilimanjaro region of Tanzania, the reality of <strong>human-wildlife conflict</strong> was not an abstract concept — it was part of daily life. Julius watched animals, driven by resource scarcity and habitat encroachment, raid local crops. In response, villagers fought back to protect their livelihoods, often resulting in the tragic killing of wildlife.</p>
+      <p>Watching this cycle unfold, he felt a deep sense of sorrow — but also a profound calling. The animals were not villains. The farmers were not criminals. They were both victims of a system where information was scarce, decisions were reactive, and the consequences were irreversible.</p>
+      <div class="story-highlight">
+        <p>"I realized that the true missing link was awareness. And I knew, even then, that I wanted to be part of the solution."</p>
+      </div>
+      <p>That conviction — formed in a Kilimanjaro village — would go on to shape everything that followed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CHAPTER 2 ══ -->
+<section class="story-section" style="background:var(--white);">
+  <div class="story-grid">
+    <div class="story-chapter">
+      <div class="chapter-num">02</div>
+      <p class="chapter-sub">The Foundation</p>
+      <h2 class="chapter-title">Science, resilience, and an <em>unexpected detour</em></h2>
+    </div>
+    <div class="story-body">
+      <p>To understand the root of the problem, Julius pursued a degree in <strong>Wildlife Management at the College of African Wildlife Management, Mweka</strong> — one of Africa's most respected institutions. Studying animal ecology, behavior transformed his perspective. He came to understand that human encroachment forces these interactions, and that community awareness backed by hard data is conservation's strongest shield.</p>
+      <p>But the path to a conservation career is rarely a straight line. After graduation, Julius faced the harsh reality of unemployment. To survive, he took a role as a <strong>hardware store clerk</strong> — a world away from the savannah.</p>
+      <div class="story-highlight">
+        <p>"What seemed like a detour became a gift. I mastered inventory systems, database management, and structured data control — skills that would later become my secret weapon."</p>
+      </div>
+      <p>The discipline of managing physical stock translated directly into the discipline of managing biological data. Without knowing it, Julius was building the foundation of what WDA-Lab would become.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CHAPTER 3 ══ -->
+<section class="story-section" style="background:var(--cream);">
+  <div class="story-grid">
+    <div class="story-chapter">
+      <div class="chapter-num">03</div>
+      <p class="chapter-sub">The Turning Point</p>
+      <h2 class="chapter-title">Mentorship, technology, and a <em>new purpose</em></h2>
+    </div>
+    <div class="story-body">
+      <p>The true breakthrough came when Julius joined the <strong>Centre for Research Cooperation (CRC)</strong> in Tanzania. Under the mentorship and guidance of <strong>Howard Frederick</strong>, his background in wildlife biology collided with his passion for systems management in a way that changed everything.</p>
+      <p>He immersed himself in the world of <strong>wildlife data annotation, entry, management, and analysis</strong>. He saw firsthand how labeling aerial sensor image, camera trap images, analyzing output of the data, mapping  and managing migration datasets could predict animal movements — and prevent conflict before it even started.</p>
+      <div class="story-highlight">
+        <p>"I saw how the right data, in the right hands, at the right time, could prevent the very scenes I witnessed growing up. That was the moment everything became clear."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CHAPTER 4 ══ -->
+<section class="story-section" style="background:var(--forest);">
+  <div class="story-grid">
+    <div class="story-chapter">
+      <div class="chapter-num" style="color:rgba(255,255,255,0.06);">04</div>
+      <p class="chapter-sub" style="color:rgba(255,255,255,0.4);">The Launch</p>
+      <h2 class="chapter-title" style="color:#fff;">When the contract ended, <em style="color:var(--amber);">the mission began</em></h2>
+    </div>
+    <div class="story-body">
+      <p style="color:rgba(255,255,255,0.6);">When Julius's contract at CRC ended in 2023, he did not see a closing door. He saw an opening. Armed with field expertise, data skills, and an intimate understanding of what conservation organizations truly needed, he launched <strong style="color:rgba(255,255,255,0.9);">Wild Data Annotation Lab</strong>.</p>
+      <p style="color:rgba(255,255,255,0.6);">The premise was simple but powerful: conservation organizations & Researchers across Africa were sitting on enormous volumes of raw wildlife data — camera trap images, field records, migration logs — but lacked the specialized capacity to process, structure, and analyze it at the speed and scale modern conservation demands.</p>
+      <p style="color:rgba(255,255,255,0.6);">WDA Lab would be the bridge. Not a generic data company, but a team of <strong style="color:rgba(255,255,255,0.9);">field-trained specialists</strong> who understood both the science and the stakes — people who could look at an annotated image and understand what it meant for the ecosystem it came from.</p>
+      <div class="story-highlight" style="border-left-color:var(--amber);background:rgba(212,168,75,0.07);">
+        <p style="color:rgba(255,255,255,0.85);">"We do not just process wildlife data. We understand it."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TIMELINE ══ -->
+<section class="timeline-section">
+  <div class="timeline-header">
+    <p class="section-tag tag-sage">The Journey</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:700;line-height:1.05;color:var(--ink);">Key milestones along <em style="font-style:italic;color:var(--moss);">the way</em></h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-left">
+        <div class="timeline-year">Early</div>
+        <div class="timeline-event">The Spark</div>
+        <div class="timeline-desc">Growing up in Kilimanjaro, witnessing human-wildlife conflict firsthand and feeling called to find a better way.</div>
+      </div>
+      <div class="timeline-right"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-left"></div>
+      <div class="timeline-right">
+        <div class="timeline-year">Mweka</div>
+        <div class="timeline-event">Wildlife Management Degree</div>
+        <div class="timeline-desc">Graduated from the College of African Wildlife Management, Mweka — gaining deep scientific grounding in animal behavior and ecology.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-left">
+        <div class="timeline-year">CRC</div>
+        <div class="timeline-event">The Turning Point</div>
+        <div class="timeline-desc">Joined the Centre for Research Cooperation under the mentorship of Howard Frederick — merging wildlife biology with data systems expertise.</div>
+      </div>
+      <div class="timeline-right"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-left"></div>
+      <div class="timeline-right">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-event">WDA-Lab Founded</div>
+        <div class="timeline-desc">Launched Wild Data Annotation Lab in Arusha, Tanzania — providing specialized wildlife data services to conservation organizations, Researchers, and Students across Africa.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-left">
+        <div class="timeline-year">2026</div>
+        <div class="timeline-event">Growing Impact</div>
+        <div class="timeline-desc">Over 1,000,000 wildlife images annotated. Projects delivered across 5 countries — Botswana, Zimbabwe, South Sudan, Mozambique, and Tanzania.</div>
+      </div>
+      <div class="timeline-right"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VALUES ══ -->
+<section class="values-section">
+  <div class="values-inner">
+    <div class="values-header">
+      <div>
+        <p class="section-tag tag-amber">What Drives Us</p>
+        <h2>Rooted in the field. <em>Built for the future.</em></h2>
+      </div>
+      <p class="values-right-text">Every decision WDA Lab makes traces back to the same source — a deep respect for Africa's wildlife and an unshakeable belief that better data leads to better conservation outcomes.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="14" stroke="#D4A84B" stroke-width="1.2"/>
+          <circle cx="18" cy="18" r="5" stroke="#D4A84B" stroke-width="1.2"/>
+          <line x1="18" y1="4" x2="18" y2="13" stroke="#D4A84B" stroke-width="1.2"/>
+          <line x1="18" y1="23" x2="18" y2="32" stroke="#D4A84B" stroke-width="1.2"/>
+        </svg>
+        <h3 class="value-name">Precision</h3>
+        <p class="value-desc">Conservation decisions are only as good as the data behind them. We hold ourselves to the highest standard of accuracy on every project we deliver.</p>
+      </div>
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M18 4 L32 28 L4 28 Z" stroke="#D4A84B" stroke-width="1.2" fill="none"/>
+          <line x1="18" y1="14" x2="18" y2="22" stroke="#D4A84B" stroke-width="1.2"/>
+          <circle cx="18" cy="25" r="1.5" fill="#D4A84B"/>
+        </svg>
+        <h3 class="value-name">Purpose</h3>
+        <p class="value-desc">We are not a generic data company. Every dataset we process is connected to a real ecosystem, a real species, and a real conservation outcome.</p>
+      </div>
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 36 36" fill="none">
+          <rect x="4" y="8" width="28" height="20" rx="2" stroke="#D4A84B" stroke-width="1.2"/>
+          <line x1="4" y1="14" x2="32" y2="14" stroke="#D4A84B" stroke-width="1.2"/>
+          <circle cx="10" cy="11" r="1.5" fill="#D4A84B"/>
+          <circle cx="16" cy="11" r="1.5" fill="#D4A84B"/>
+        </svg>
+        <h3 class="value-name">Reliability</h3>
+        <p class="value-desc">Conservation organizations depend on us to deliver — on time, at scale, and without compromise. We take that responsibility seriously.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<div class="cta-section">
+  <h2>Be part of the<br>conservation data mission.</h2>
+  <a href="contact.html" class="btn btn-dark">Work with us →</a>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div style="text-align:center;">
+    <div class="footer-info">
+      P.O. Box 2123, Arusha, Tanzania &nbsp;|&nbsp; +255 (0) 71 724 0523 &nbsp;|&nbsp; info@wda-lab.com &nbsp;|&nbsp; Reg. No. 631498
+    </div>
+  </div>
+  <nav class="footer-nav">
+    <a href="privacy.html" style="text-transform:capitalize;">Privacy Policy</a>
+  </nav>
+  <div class="footer-info" style="margin-top:8px;">&copy; 2026 WDA-Lab. All rights reserved.</div>
+</footer>
+
+<script>
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    header.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
+  });
+</script>
+</body>
+</html>

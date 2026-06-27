@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achievements & Impact — WDA-Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:    #0D1A0F;
+    --forest: #1B3A22;
+    --moss:   #2E5E38;
+    --sage:   #607A5F;
+    --gold:   #BF8C3A;
+    --amber:  #D4A84B;
+    --sand:   #E8DCC8;
+    --cream:  #F6F2EA;
+    --white:  #FDFCF9;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Jost',sans-serif; color:var(--ink); background:var(--white); overflow-x:hidden; }
+
+  /* ─── HEADER ─── */
+  header {
+    width:100%; background:rgba(13,26,15,0.97);
+    padding:0 60px; height:80px;
+    display:flex; align-items:center; justify-content:space-between;
+    position:relative; z-index:100;
+  }
+  .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .nav-logo-mark {
+    width:40px; height:40px; border:1.5px solid var(--amber); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:700; color:var(--amber);
+  }
+  .nav-logo-text { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--amber); letter-spacing:0.04em; }
+  nav { display:flex; align-items:center; gap:8px; }
+  .nav-item { position:relative; }
+  .nav-link {
+    display:flex; align-items:center; gap:5px; padding:10px 16px;
+    font-size:13px; font-weight:400; letter-spacing:0.05em;
+    color:rgba(255,255,255,0.85); text-decoration:none;
+    border-radius:2px; transition:color 0.3s; cursor:pointer;
+    background:none; border:none; font-family:'Jost',sans-serif;
+  }
+  .nav-link:hover { color:#fff; }
+  .nav-link svg { width:10px; height:10px; transition:transform 0.3s; }
+  .nav-item:hover .nav-link svg { transform:rotate(180deg); }
+  .dropdown {
+    position:absolute; top:calc(100% + 4px); left:0;
+    background:rgba(13,26,15,0.98); border:1px solid rgba(255,255,255,0.08);
+    min-width:210px; opacity:0; visibility:hidden; transform:translateY(-8px);
+    transition:all 0.3s; border-radius:2px; overflow:hidden; z-index:200;
+  }
+  .nav-item:hover .dropdown { opacity:1; visibility:visible; transform:translateY(0); }
+  .dropdown a {
+    display:block; padding:12px 20px; font-size:13px; color:rgba(255,255,255,0.7);
+    text-decoration:none; letter-spacing:0.03em; transition:background 0.2s,color 0.2s;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  .dropdown a:last-child { border-bottom:none; }
+  .dropdown a:hover { background:rgba(191,140,58,0.12); color:var(--amber); }
+  .nav-cta {
+    background:var(--gold); color:var(--ink) !important; padding:10px 24px !important;
+    font-weight:500; border-radius:2px; transition:background 0.3s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background:var(--amber) !important; transform:translateY(-1px); }
+
+  /* ─── PAGE HERO ─── */
+  .page-hero {
+    background:var(--ink); padding:100px 60px 80px;
+    position:relative; overflow:hidden;
+  }
+  .page-hero::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse 60% 70% at 80% 50%, rgba(46,94,56,0.2) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 40% at 10% 80%, rgba(191,140,58,0.07) 0%, transparent 60%);
+  }
+  .page-hero-inner { position:relative; z-index:1; max-width:720px; }
+  .section-tag {
+    font-size:11px; font-weight:500; letter-spacing:0.3em; text-transform:uppercase;
+    display:flex; align-items:center; gap:14px; margin-bottom:18px;
+  }
+  .section-tag::before { content:''; display:block; width:28px; height:1px; }
+  .tag-amber { color:var(--amber); }
+  .tag-amber::before { background:var(--amber); }
+  .tag-sage { color:var(--sage); }
+  .tag-sage::before { background:var(--sage); }
+  .page-hero h1 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(48px,7vw,96px); font-weight:700; line-height:0.95;
+    color:#fff; margin-bottom:28px;
+  }
+  .page-hero h1 em { font-style:italic; color:var(--amber); }
+  .page-hero p {
+    font-size:17px; font-weight:300; line-height:1.85;
+    color:rgba(255,255,255,0.55); max-width:600px;
+  }
+
+  /* ─── METRICS BAND ─── */
+  .metrics-band {
+    background:var(--forest);
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:1px; background-color:rgba(255,255,255,0.06);
+  }
+  .metric-cell {
+    background:var(--forest); padding:52px 44px;
+    transition:background 0.3s;
+  }
+  .metric-cell:hover { background:#1f4228; }
+  .metric-num {
+    font-family:'Cormorant Garamond',serif; font-size:64px; font-weight:700;
+    color:var(--amber); line-height:1; margin-bottom:12px;
+  }
+  .metric-label {
+    font-size:13px; font-weight:300; letter-spacing:0.04em;
+    color:rgba(255,255,255,0.45); line-height:1.6;
+  }
+
+  /* ─── OVERVIEW SECTION ─── */
+  .overview-section { background:var(--cream); padding:100px 60px; }
+  .overview-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+  h2.section-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(36px,5vw,58px); font-weight:700; line-height:1.05; color:var(--ink);
+  }
+  h2.section-title em { font-style:italic; color:var(--moss); }
+  .body-text { font-size:15px; font-weight:300; line-height:1.9; color:rgba(13,26,15,0.6); }
+  .body-text p+p { margin-top:18px; }
+
+  /* ─── PROJECTS SECTION ─── */
+  .projects-section { background:var(--white); padding:100px 60px; }
+  .projects-header { margin-bottom:56px; }
+  .projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(13,26,15,0.08); }
+  .project-card {
+    background:var(--white); padding:44px 36px;
+    position:relative; overflow:hidden; transition:all 0.4s;
+  }
+  .project-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
+    background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s;
+  }
+  .project-card:hover { background:var(--forest); }
+  .project-card:hover::after { transform:scaleX(1); }
+  .project-country {
+    font-size:10px; letter-spacing:0.25em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:16px; font-weight:500; transition:color 0.4s;
+  }
+  .project-card:hover .project-country { color:var(--amber); }
+  .project-name {
+    font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:600;
+    color:var(--ink); line-height:1.2; margin-bottom:12px; transition:color 0.4s;
+  }
+  .project-card:hover .project-name { color:#fff; }
+  .project-type {
+    font-size:13px; font-weight:300; line-height:1.7;
+    color:rgba(13,26,15,0.5); transition:color 0.4s;
+  }
+  .project-card:hover .project-type { color:rgba(255,255,255,0.5); }
+
+  /* ─── PARTNERS SECTION ─── */
+  .partners-section { background:var(--sand); padding:100px 60px; }
+  .partners-header { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end; margin-bottom:64px; }
+  .partners-right { font-size:15px; font-weight:300; line-height:1.85; color:rgba(13,26,15,0.55); }
+  .partners-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .partner-card {
+    background:var(--white); padding:40px 36px;
+    box-shadow:0 4px 30px rgba(13,26,15,0.06);
+    transition:box-shadow 0.4s, transform 0.4s;
+  }
+  .partner-card:hover { transform:translateY(-4px); box-shadow:0 16px 50px rgba(13,26,15,0.1); }
+  .partner-initial {
+    width:52px; height:52px; border-radius:50%;
+    background:var(--forest); display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700;
+    color:var(--amber); margin-bottom:20px;
+  }
+  .partner-name {
+    font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700;
+    color:var(--ink); margin-bottom:8px; line-height:1.2;
+  }
+  .partner-role {
+    font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--sage); margin-bottom:14px; font-weight:500;
+  }
+  .partner-desc { font-size:13px; font-weight:300; line-height:1.75; color:rgba(13,26,15,0.5); }
+
+  /* ─── WHY WORK WITH US ─── */
+  .why-section { background:var(--ink); padding:100px 60px; position:relative; overflow:hidden; }
+  .why-section::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse 40% 50% at 90% 50%, rgba(46,94,56,0.15) 0%, transparent 65%);
+  }
+  .why-inner { position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+  .why-section h2.section-title { color:#fff; }
+  .why-section h2.section-title em { color:var(--amber); }
+  .why-list { list-style:none; display:flex; flex-direction:column; gap:0; }
+  .why-item {
+    display:flex; align-items:flex-start; gap:20px;
+    padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .why-item:first-child { border-top:1px solid rgba(255,255,255,0.06); }
+  .why-dot { width:6px; height:6px; border-radius:50%; background:var(--amber); flex-shrink:0; margin-top:8px; }
+  .why-text { font-size:15px; font-weight:300; line-height:1.75; color:rgba(255,255,255,0.6); }
+  .why-text strong { color:rgba(255,255,255,0.9); font-weight:400; }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    background:var(--gold); padding:90px 60px;
+    display:flex; justify-content:space-between; align-items:center; gap:48px;
+  }
+  .cta-section h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(34px,4.5vw,60px); font-weight:700; color:var(--ink); line-height:1.05;
+  }
+  .btn {
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'Jost',sans-serif; font-size:13px; font-weight:500;
+    letter-spacing:0.08em; text-transform:uppercase;
+    text-decoration:none; border-radius:2px; transition:all 0.3s; cursor:pointer; border:none;
+  }
+  .btn-dark { background:var(--ink); color:var(--amber); padding:16px 44px; white-space:nowrap; }
+  .btn-dark:hover { background:var(--forest); transform:translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background:var(--ink); padding:48px 60px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;
+    border-top:1px solid rgba(255,255,255,0.05);
+  }
+  .footer-brand { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--amber); letter-spacing:0.04em; margin-bottom:6px; }
+  .footer-info { font-size:12px; font-weight:300; color:rgba(255,255,255,0.25); line-height:1.9; letter-spacing:0.04em; }
+  .footer-nav { display:flex; gap:28px; flex-wrap:wrap; }
+  .footer-nav a { font-size:12px; font-weight:400; letter-spacing:0.08em; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.3s; text-transform:uppercase; }
+  .footer-nav a:hover { color:var(--amber); }
+
+ /* ─── TABLET ─── */
+@media(max-width:1024px) and (min-width:601px){
+    header { padding:0 24px; }
+    .hero { height:55vw; min-height:300px; }
+    .intro-band { padding:48px 24px; }
+    .team-section { padding:64px 24px; }
+    .split-block, .team-intro, .vision-inner, .team-card, .contact-cta { grid-template-columns:1fr; }
+    .split-img { min-height:280px; }
+    .services-cards { grid-template-columns:1fr 1fr; }
+    footer { flex-direction:column; align-items:flex-start; padding:40px 24px; }
+    nav { display:flex; }
+  }
+
+/* ─── MOBILE ─── */
+@media(max-width:600px){
+    header { padding:0 24px; }
+    .hero { height:55vw; min-height:300px; }
+    .intro-band { padding:48px 24px; }
+    .team-section { padding:64px 24px; }
+    .split-block, .team-intro, .vision-inner, .team-card, .contact-cta { grid-template-columns:1fr; }
+    .split-img { min-height:280px; }
+    .services-cards { grid-template-columns:1fr; }
+    footer { flex-direction:column; align-items:flex-start; padding:40px 24px; }
+    nav { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="WDA Lab" style="height:48px;width:auto;object-fit:contain;border-radius:12%;">
+  </a>
+  <nav>
+    <div class="nav-item">
+      <button class="nav-link">
+        Services
+        <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="dropdown">
+         <a href="index.html">Home</a>
+        <a href="services.html#annotation">High-Fidelity Annotation</a>
+        <a href="services.html#data">Data Entry &amp; Management</a>
+        <a href="services.html#analysis">Data Analysis</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <button class="nav-link">
+        About
+        <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="dropdown">
+        <a href="team.html">Our Team</a>
+        <a href="story.html">Our Story</a>
+        <a href="vision.html">Our Vision</a>
+      </div>
+    </div>
+    <a href="contact.html" class="nav-link nav-cta">Contact Us</a>
+  </nav>
+</header>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="section-tag tag-amber">Achievements & Impact</p>
+    <h1>Precision data.<br><em>Proven impact.</em></h1>
+    <p>Over one million images processed. Five countries supported. A growing network of conservation partners across sub-Saharan Africa. This is what rigorous wildlife data work looks like in practice.</p>
+  </div>
+</section>
+
+<!-- ══ METRICS BAND ══ -->
+<div class="metrics-band">
+  <div class="metric-cell">
+    <div class="metric-num"><span class="count-up" data-target="1000000" data-suffix="M+" data-divide="1000000">0</span></div>
+    <div class="metric-label">Wildlife images annotated & quality-checked</div>
+  </div>
+  <div class="metric-cell">
+    <div class="metric-num"><span class="count-up" data-target="5" data-suffix="">0</span></div>
+    <div class="metric-label">Countries supported across sub-Saharan Africa</div>
+  </div>
+  <div class="metric-cell">
+    <div class="metric-num"><span class="count-up" data-target="3" data-suffix="">0</span></div>
+    <div class="metric-label">Data entry & management projects completed</div>
+  </div>
+  <div class="metric-cell">
+    <div class="metric-num"><span class="count-up" data-target="4" data-suffix="+">0</span></div>
+    <div class="metric-label">Leading conservation partners across Africa</div>
+  </div>
+</div>
+
+<!-- ══ OVERVIEW ══ -->
+<section class="overview-section">
+  <div class="overview-grid">
+    <div>
+      <p class="section-tag tag-sage">Our Story</p>
+      <h2 class="section-title">Built on fieldwork.<br><em>Driven by precision.</em></h2>
+    </div>
+    <div class="body-text">
+      <p>WDA Lab was founded on a single conviction: that conservation outcomes depend as much on the quality of data behind the science as on the fieldwork itself. Operating at the intersection of wildlife research and data precision, we have become a trusted partner for conservation organizations working across some of Africa's most ecologically significant landscapes.</p>
+      <p>Our team brings together field-trained wildlife specialists and data professionals who understand both the scientific demands of conservation research and the operational realities of working in complex African ecosystems. We handle large-scale camera trap image libraries, biodiversity monitoring datasets, and multi-site data management workflows with the accuracy, consistency, and turnaround that modern conservation programs require.</p>
+      <p>Every project we deliver is a contribution to the broader mission of protecting Africa's wildlife heritage — one dataset at a time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section class="projects-section">
+  <div class="projects-header">
+    <p class="section-tag tag-sage">Projects & Landscapes</p>
+    <h2 class="section-title">Where our work<br><em>has made a difference</em></h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <p class="project-country">Botswana</p>
+      <h3 class="project-name">KAZA Transfrontier Conservation Area</h3>
+      <p class="project-type">Wildlife aerial image annotation & data management across one of Africa's largest transboundary conservation landscapes.</p>
+    </div>
+    <div class="project-card">
+      <p class="project-country">Zimbabwe</p>
+      <h3 class="project-name">Sango Wildlife Conservancy</h3>
+      <p class="project-type"> Wildlife aerial image annotation and Species identification supporting wildlife management planning.</p>
+    </div>
+    <div class="project-card">
+      <p class="project-country">Zimbabwe</p>
+      <h3 class="project-name">Save Valley Conservancy</h3>
+      <p class="project-type">Wildlife aerial image annotation to support large-scale wildlife population assessments.</p>
+    </div>
+    <div class="project-card">
+      <p class="project-country">South Sudan</p>
+      <h3 class="project-name">Boma-Badingilo Landscape</h3>
+      <p class="project-type">Conservation data annotation, identification and processing supporting one of Africa's most significant wildlife migration corridors.</p>
+    </div>
+    <div class="project-card">
+      <p class="project-country">Mozambique</p>
+      <h3 class="project-name">Marromeu National Reserve</h3>
+      <p class="project-type">Estimating wildlife population and mapping human activities for management services supporting biodiversity.</p>
+    </div>
+    <div class="project-card">
+      <p class="project-country">Tanzania</p>
+      <h3 class="project-name">Multiple Wildlife Projects</h3>
+      <p class="project-type">Data annotation, entry, and management, support across multiple conservation programs in Tanzania.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PARTNERS ══ -->
+<section class="partners-section">
+  <div class="partners-header">
+    <div>
+      <p class="section-tag tag-sage">Our Partners</p>
+      <h2 class="section-title">Organizations we have<br><em>worked with</em></h2>
+    </div>
+    <p class="partners-right">WDA Lab has built long-term working relationships with leading conservation NGOs, research consultancies, and protected area management organizations across Africa.</p>
+  </div>
+  <div class="partners-grid">
+    <div class="partner-card">
+      <img src="images/partner/mwslab.png" alt="MWS Lab" style="height:60px;width:auto;object-fit:contain;margin-bottom:20px;">
+      <h3 class="partner-name">MWS Lab</h3>
+      <p class="partner-role">Conservation Research Partner</p>
+      <p class="partner-desc">Collaborated on large-scale wildlife image annotation and data processing projects across southern Africa.</p>
+    </div>
+    <div class="partner-card">
+      <img src="images/partner/habitathorizon.png" alt="Habitat Horizon" style="height:60px;width:auto;object-fit:contain;margin-bottom:20px;">
+      <h3 class="partner-name"><a href="https://www.habitathorizons.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:color 0.3s;">Habitat Horizon</a></h3>
+      <p class="partner-role">Conservation Partner</p>
+      <p class="partner-desc"> plays a vital role in African wildlife conservation by providing cutting-edge, non-invasive photogrammetric aerial surveys and ecological monitoring. They deliver accurate and verifiable wildlife population counts and habitat health data essential for sustainable management and evidence-based conservation.</p>
+    </div>
+    <div class="partner-card">
+      <img src="images/partner/africanpark.png" alt="African Parks" style="height:60px;width:auto;object-fit:contain;margin-bottom:20px;">
+      <h3 class="partner-name"><a href="https://www.africanparks.org" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:color 0.3s;">African Parks</a></h3>
+      <p class="partner-role">Protected Area Management</p>
+      <p class="partner-desc">rehabilitate degraded ecosystems, protect endangered wildlife, and support the socioeconomic development of adjacent communities</p>
+    </div>
+    <div class="partner-card">
+      <img src="images/partner/crc.png" alt="Centre for Research Cooperation" style="height:60px;width:auto;object-fit:contain;margin-bottom:20px;">
+      <h3 class="partner-name"><a href="https://www.tzcrc.co.tz" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:color 0.3s;">Centre for Research Cooperation</a></h3>
+      <p class="partner-role">Research Consultant — Tanzania</p>
+      <p class="partner-desc">facilitates wildlife and nature conservation in Tanzania. It acts as a comprehensive support and administrative hub for local and foreign researchers, students, and NGOs to study and preserve the country's natural resources</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY WORK WITH US ══ -->
+<section class="why-section">
+  <div class="why-inner">
+    <div>
+      <p class="section-tag tag-amber">Why Work With Us</p>
+      <h2 class="section-title" style="color:#fff;">The case for <em>choosing WDA Lab</em></h2>
+    </div>
+    <ul class="why-list">
+      <li class="why-item">
+        <span class="why-dot"></span>
+        <span class="why-text"><strong>Over one million images processed</strong> with rigorous quality control — accuracy you can build research on.</span>
+      </li>
+      <li class="why-item">
+        <span class="why-dot"></span>
+        <span class="why-text"><strong>Field-trained specialists</strong> who understand conservation science, not just data entry.</span>
+      </li>
+      <li class="why-item">
+        <span class="why-dot"></span>
+        <span class="why-text"><strong>Proven across five countries</strong> and some of Africa's most complex and ecologically significant ecosystems.</span>
+      </li>
+      <li class="why-item">
+        <span class="why-dot"></span>
+        <span class="why-text"><strong>End-to-end support</strong> from raw data intake to analysis-ready output — one trusted partner for the full pipeline.</span>
+      </li>
+      <li class="why-item">
+        <span class="why-dot"></span>
+        <span class="why-text"><strong>Trusted by leading NGOs</strong>, conservancies, and research institutions including African Parks and Habitat Horizon.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<div class="cta-section">
+  <h2>Ready to work with a trusted data partner?</h2>
+  <a href="contact.html" class="btn btn-dark">Contact us →</a>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div style="text-align:center;">
+    <div class="footer-info">
+      P.O. Box 2123, Arusha, Tanzania &nbsp;|&nbsp; +255 (0) 71 724 0523 &nbsp;|&nbsp; info@wda-lab.com &nbsp;|&nbsp; Reg. No. 631498
+    </div>
+  </div>
+  <nav class="footer-nav">
+    <a href="privacy.html" style="text-transform:capitalize;">Privacy Policy</a>
+  </nav>
+  <div class="footer-info" style="margin-top:8px;">&copy; 2026 WDA-Lab. All rights reserved.</div>
+</footer>
+
+<script>
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    header.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
+  });
+</script>
+
+<script>
+  window.addEventListener('load', function() {
+    const countEls = document.querySelectorAll('.count-up');
+    if (!countEls.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.done) {
+          entry.target.dataset.done = 'true';
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          const divide = parseInt(el.dataset.divide) || 1;
+          const duration = 2000;
+          const steps = 60;
+          const increment = target / steps;
+          let step = 0;
+          const timer = setInterval(() => {
+            step++;
+            const current = Math.min(increment * step, target);
+            const display = divide > 1 ? (current / divide).toFixed(1) : Math.floor(current);
+            el.textContent = display + suffix;
+            if (step >= steps) clearInterval(timer);
+          }, duration / steps);
+        }
+      });
+    }, { threshold: 0.3 });
+    countEls.forEach(el => observer.observe(el));
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — WDA Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0D1A0F;--forest:#1B3A22;--moss:#2E5E38;--sage:#607A5F;--gold:#BF8C3A;--amber:#D4A84B;--sand:#E8DCC8;--cream:#F6F2EA;--white:#FDFCF9;}
+  *, *::before, *::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Jost',sans-serif;color:var(--ink);background:var(--white);overflow-x:hidden;}
+
+  /* ─── HEADER ─── */
+  header{width:100%;background:rgba(13,26,15,0.97);padding:0 60px;height:80px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:100;}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  nav{display:flex;align-items:center;gap:8px;}
+  .nav-item{position:relative;}
+  .nav-link{display:flex;align-items:center;gap:5px;padding:10px 16px;font-size:13px;font-weight:400;letter-spacing:0.05em;color:rgba(255,255,255,0.85);text-decoration:none;border-radius:2px;transition:color 0.3s;cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;}
+  .nav-link:hover{color:#fff;}
+  .nav-link svg{width:10px;height:10px;transition:transform 0.3s;}
+  .nav-item:hover .nav-link svg{transform:rotate(180deg);}
+  .dropdown{position:absolute;top:calc(100% + 4px);left:0;background:rgba(13,26,15,0.98);border:1px solid rgba(255,255,255,0.08);min-width:210px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all 0.3s;border-radius:2px;overflow:hidden;z-index:200;}
+  .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+  .dropdown a{display:block;padding:12px 20px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;letter-spacing:0.03em;transition:background 0.2s,color 0.2s;border-bottom:1px solid rgba(255,255,255,0.04);}
+  .dropdown a:last-child{border-bottom:none;}
+  .dropdown a:hover{background:rgba(191,140,58,0.12);color:var(--amber);}
+  .nav-cta{background:var(--gold);color:var(--ink)!important;padding:10px 24px!important;font-weight:500;border-radius:2px;transition:background 0.3s,transform 0.2s!important;}
+  .nav-cta:hover{background:var(--amber)!important;transform:translateY(-1px);}
+
+  /* ─── PAGE HERO ─── */
+  .page-hero{padding:80px 60px 100px;background:var(--forest);position:relative;overflow:hidden;}
+  .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%, rgba(46,94,56,0.3) 0%, transparent 65%);}
+  .page-hero-tag{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+  .page-hero-tag::before{content:'';width:28px;height:1px;background:var(--amber);}
+  .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,86px);font-weight:700;line-height:1;color:#fff;position:relative;z-index:1;}
+  .page-hero h1 em{font-style:italic;color:var(--amber);}
+  .page-hero p{font-size:16px;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.55);max-width:560px;margin-top:24px;position:relative;z-index:1;}
+
+  /* ─── SERVICE BLOCK ─── */
+  .svc-block{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(13,26,15,0.08);}
+  .svc-img-wrap{overflow:hidden;display:flex;align-items:center;justify-content:center;padding:48px;background:var(--cream);}
+  .svc-img-wrap.sand{background:var(--sand);}
+  .svc-img-wrap img{width:100%;height:360px;object-fit:cover;border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,0.15);display:block;}
+  .svc-content{padding:80px 70px;display:flex;flex-direction:column;justify-content:center;background:var(--cream);}
+  .svc-content.sand{background:var(--sand);}
+  .svc-tag{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--sage);margin-bottom:20px;font-weight:500;}
+  .svc-h{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.5vw,52px);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:24px;}
+  .svc-h em{font-style:italic;color:var(--moss);}
+  .svc-body{font-size:15px;font-weight:300;line-height:1.9;color:rgba(13,26,15,0.55);}
+  .svc-body p+p{margin-top:16px;}
+  .svc-features{margin-top:32px;display:flex;flex-direction:column;gap:12px;}
+  .feat{display:flex;align-items:flex-start;gap:14px;font-size:14px;font-weight:300;color:rgba(13,26,15,0.65);}
+  .feat::before{content:'';width:20px;height:1px;background:var(--gold);margin-top:11px;flex-shrink:0;}
+
+  /* ─── CTA ─── */
+  .svc-cta{background:var(--gold);padding:80px 60px;display:flex;justify-content:space-between;align-items:center;gap:40px;}
+  .svc-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,52px);font-weight:700;color:var(--ink);line-height:1.1;}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.3s;cursor:pointer;border:none;}
+  .btn-dark{background:var(--ink);color:var(--amber);padding:16px 40px;white-space:nowrap;}
+  .btn-dark:hover{background:var(--forest);transform:translateY(-2px);}
+
+  /* ─── FOOTER ─── */
+  footer{background:var(--ink);padding:48px 60px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:24px;border-top:1px solid rgba(255,255,255,0.05);}
+  .footer-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--amber);letter-spacing:0.04em;margin-bottom:6px;}
+  .footer-info{font-size:12px;font-weight:300;color:rgba(255,255,255,0.25);line-height:1.9;letter-spacing:0.04em;}
+  .footer-nav{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;}
+  .footer-nav a{font-size:12px;font-weight:400;letter-spacing:0.08em;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.3s;text-transform:uppercase;}
+  .footer-nav a:hover{color:var(--amber);}
+
+ /* ─── TABLET ─── */
+@media(max-width:1024px) and (min-width:601px){
+    header{padding:0 24px;}
+    nav{display:flex;}
+    .page-hero{padding:60px 24px 72px;}
+    .svc-block{grid-template-columns:1fr;}
+    .svc-img-wrap{padding:32px;order:2;}
+    .svc-img-wrap img{height:280px;}
+    .svc-content{padding:48px 32px;order:1;}
+    .svc-cta{flex-direction:column;padding:60px 24px;}
+    footer{padding:40px 24px;}
+  }
+
+/* ─── MOBILE ─── */
+@media(max-width:600px){
+    header{padding:0 24px;}
+    nav{display:none;}
+    .page-hero{padding:48px 24px 60px;}
+    .svc-block{grid-template-columns:1fr;}
+    .svc-img-wrap{padding:24px;order:2;}
+    .svc-img-wrap img{height:220px;}
+    .svc-content{padding:40px 24px;order:1;}
+    .svc-cta{flex-direction:column;padding:48px 24px;}
+    footer{padding:40px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo.png" alt="WDA Lab" style="height:48px;width:auto;object-fit:contain;border-radius:12px;">
+  </a>
+  <nav>
+    <div class="nav-item">
+      <button class="nav-link">
+        Services
+        <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="dropdown">
+         <a href="index.html">Home</a>
+        <a href="services.html#annotation">High-Fidelity Annotation</a>
+        <a href="services.html#data">Data Entry &amp; Management</a>
+        <a href="services.html#analysis">Data Analysis</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <button class="nav-link">
+        About
+        <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="dropdown">
+        <a href="team.html">Our Team</a>
+        <a href="story.html">Our Story</a>
+        <a href="vision.html">Our Vision</a>
+      </div>
+    </div>
+    <a href="contact.html" class="nav-link nav-cta">Contact Us</a>
+  </nav>
+</header>
+
+<!-- ══ PAGE HERO ══ -->
+<div class="page-hero">
+  <p class="page-hero-tag">Our Services</p>
+  <h1>From raw data to<br><em>research-ready</em> insights</h1>
+  <p>We handle every step — from data entry to deep analysis — so your conservation team can focus on what matters most.</p>
+</div>
+
+<!-- ══ SERVICE 1 — text left, image right ══ -->
+<div class="svc-block" id="annotation">
+  <div class="svc-content">
+    <p class="svc-tag">01 — Annotation</p>
+    <h2 class="svc-h">High-Fidelity <em>Annotation</em></h2>
+    <div class="svc-body">
+      <p>We go beyond simple identification, capturing the nuances of species behavior and individual traits across terrestrial and aerial imagery.</p>
+      <p>Using specialized annotation software, our team produces structured, verified data that your research pipeline can immediately trust and build upon.</p>
+    </div>
+    <div class="svc-features">
+      <div class="feat">Species identification & behavioral tagging</div>
+      <div class="feat">Individual trait annotation (age, sex, condition)</div>
+      <div class="feat">Terrestrial & aerial image processing</div>
+      <div class="feat">Camera trap data annotation</div>
+      <div class="feat">Custom annotation schema development</div>
+    </div>
+  </div>
+  <div class="svc-img-wrap">
+    <img src="images/training 2.jpg" alt="High-Fidelity Annotation">
+  </div>
+</div>
+
+<!-- ══ SERVICE 2 — image left, text right ══ -->
+<div class="svc-block" id="data">
+  <div class="svc-img-wrap sand">
+    <img src="images/accdb.png" alt="Data Entry and Management">
+  </div>
+  <div class="svc-content sand">
+    <p class="svc-tag">02 — Data Management</p>
+    <h2 class="svc-h">Systematic Data Entry <em>&amp; Management</em></h2>
+    <div class="svc-body">
+      <p>Even the most sophisticated analysis is only as good as the database it sits on. We handle the heavy lifting of systematic data entry, transforming raw field notes and sensor metadata into standardized, error-free formats.</p>
+      <p>Whether you use specialized conservation platforms or custom databases, we ensure every record is accurately entered, tagged, and ready for immediate reporting.</p>
+    </div>
+    <div class="svc-features">
+      <div class="feat">Field note digitization & standardization</div>
+      <div class="feat">Sensor & GPS metadata processing</div>
+      <div class="feat">Database entry across platforms (SMART, Airtable, Access, Excel)</div>
+      <div class="feat">Error checking & validation protocols</div>
+      <div class="feat">Custom tagging and classification systems</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SERVICE 3 — text left, image right ══ -->
+<div class="svc-block" id="analysis">
+  <div class="svc-content">
+    <p class="svc-tag">03 — Analysis</p>
+    <h2 class="svc-h">Data Analysis</h2>
+    <div class="svc-body">
+      <p>We transform filtered datasets into high-level ecological insights. By applying rigorous statistical modeling, we move beyond simple observations to identify true population trends, habitat preferences, and behavioral patterns.</p>
+      <p>Our analysis provides the quantitative evidence required for reporting, decision making, and peer-reviewed research.</p>
+    </div>
+    <div class="svc-features">
+      <div class="feat">Population trend analysis & modeling</div>
+      <div class="feat">Habitat use & preference mapping</div>
+      <div class="feat">Statistical reporting for publication</div>
+      <div class="feat">Data visualization & infographic output</div>
+    </div>
+  </div>
+  <div class="svc-img-wrap">
+    <img src="images/webgraph.png" alt="Evidence-Based Analysis">
+  </div>
+</div>
+
+<!-- ══ CTA ══ -->
+<div class="svc-cta">
+  <h2>No matter where your fieldwork takes you,<br>we're the team behind the data.</h2>
+  <a href="contact.html" class="btn btn-dark">Contact us →</a>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div>
+    <div class="footer-info">
+      P.O. Box 2123, Arusha, Tanzania &nbsp;|&nbsp; +255 (0) 71 724 0523 &nbsp;|&nbsp; info@wda-lab.com &nbsp;|&nbsp; Reg. No. 631498
+    </div>
+  </div>
+  <nav class="footer-nav">
+    <a href="privacy.html" style="text-transform:capitalize;">Privacy Policy</a>
+  </nav>
+  <div class="footer-info">&copy; 2026 WDA-Lab. All rights reserved.</div>
+</footer>
+
+<script>
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    header.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
+  });
+</script>
+</body>
+</html>
