@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wildlife Data Annotation Lab</title>
+<title>WildData Annotation Lab</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -21,7 +21,7 @@
   html { scroll-behavior:smooth; }
   body { font-family:'Jost',sans-serif; color:var(--ink); background:var(--white); overflow-x:hidden; }
 
-  /* ─── HEADER — sits above everything, static flow ─── */
+  /* ─── HEADER ─── */
   header {
     width:100%;
     background:rgba(13,26,15,0.97);
@@ -31,21 +31,9 @@
     align-items:center;
     justify-content:space-between;
     position:relative;
-    z-index:100;
+    z-index:1000;
   }
   .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
-  .nav-logo-mark {
-    width:40px; height:40px;
-    border:1.5px solid var(--amber);
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:700;
-    color:var(--amber);
-  }
-  .nav-logo-text {
-    font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700;
-    color:var(--amber); letter-spacing:0.04em;
-  }
   nav { display:flex; align-items:center; gap:8px; }
   .nav-item { position:relative; }
   .nav-link {
@@ -88,7 +76,55 @@
   }
   .nav-cta:hover { background:var(--amber) !important; transform:translateY(-1px); }
 
-  /* ─── HERO — contained block below header ─── */
+  /* ─── HAMBURGER ─── */
+  .hamburger {
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    background:none;
+    border:none;
+    padding:8px;
+  }
+  .hamburger span {
+    display:block;
+    width:24px;
+    height:2px;
+    background:#fff;
+    transition:all 0.3s;
+  }
+  .mobile-nav {
+    display:none;
+    flex-direction:column;
+    background:rgba(13,26,15,0.98);
+    padding:16px 24px;
+    border-top:1px solid rgba(255,255,255,0.06);
+    position:relative;
+    z-index:999;
+  }
+  .mobile-nav a {
+    display:block;
+    padding:12px 0;
+    font-size:14px;
+    color:rgba(255,255,255,0.7);
+    text-decoration:none;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    letter-spacing:0.04em;
+    font-family:'Jost',sans-serif;
+  }
+  .mobile-nav a:last-child { border-bottom:none; }
+  .mobile-nav a:hover { color:var(--amber); }
+  .mobile-nav-section {
+    font-size:10px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--amber);
+    padding:16px 0 8px;
+    font-weight:500;
+    margin:0;
+  }
+
+  /* ─── HERO ─── */
   .hero {
     position:relative;
     height:65vh;
@@ -106,54 +142,27 @@
       url('images/hero.jpg') center center / cover no-repeat;
     z-index:0;
   }
-  .hero-bg::after {
-    content:''; position:absolute; inset:0;
-    background-image:
-      radial-gradient(ellipse 60% 40% at 70% 40%, rgba(45,92,56,0.4) 0%, transparent 70%),
-      radial-gradient(ellipse 30% 50% at 20% 60%, rgba(191,140,58,0.08) 0%, transparent 60%);
-  }
   .hero-content {
     position:relative; z-index:2;
     text-align:center;
     display:flex; flex-direction:column; align-items:center;
     padding:0 24px;
   }
-  .hero-eyebrow {
-    font-size:11px; font-weight:500; letter-spacing:0.35em;
-    text-transform:uppercase; color:var(--amber);
-    display:flex; align-items:center; gap:16px; margin-bottom:20px;
-    animation:fadeUp 1s ease both;
-  }
-  .hero-eyebrow::before,
-  .hero-eyebrow::after { content:''; display:block; width:36px; height:1px; background:var(--amber); }
   .hero-h1 {
     font-family:'Cormorant Garamond',serif;
-    font-size:clamp(52px,8vw,110px); font-weight:700; line-height:0.92;
+    font-size:clamp(52px,8vw,110px); font-weight:700; line-height:1.0;
     color:#fff; margin-bottom:20px;
     animation:fadeUp 1s 0.12s ease both;
   }
   .hero-h1 em { font-style:italic; color:var(--amber); }
   .hero-sub {
     font-size:16px; font-weight:300; line-height:1.75;
-    color:rgba(255,255,255,0.7); max-width:560px; margin-bottom:36px;
+    color:rgba(255,255,255,0.7); max-width:560px;
     animation:fadeUp 1s 0.24s ease both;
   }
-  .hero-btns { display:flex; gap:20px; align-items:center; animation:fadeUp 1s 0.36s ease both; }
-  .btn {
-    display:inline-flex; align-items:center; gap:10px;
-    font-family:'Jost',sans-serif; font-size:13px; font-weight:500;
-    letter-spacing:0.08em; text-transform:uppercase;
-    text-decoration:none; border-radius:2px;
-    transition:all 0.3s; cursor:pointer; border:none;
-  }
-  .btn-primary { background:var(--gold); color:var(--ink); padding:15px 36px; }
-  .btn-primary:hover { background:var(--amber); transform:translateY(-2px); box-shadow:0 10px 30px rgba(191,140,58,0.3); }
-  .btn-outline { background:transparent; color:rgba(255,255,255,0.85); padding:14px 32px; border:1px solid rgba(255,255,255,0.35); }
-  .btn-outline:hover { border-color:#fff; color:#fff; transform:translateY(-2px); }
-
   @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
-  /* ─── INTRO TEXT BAND ─── */
+  /* ─── INTRO BAND ─── */
   .intro-band {
     background:var(--cream);
     padding:72px 60px;
@@ -166,8 +175,7 @@
   }
   .intro-band p em { font-style:italic; color:var(--moss); }
 
-  /* ─── SECTIONS SHARED ─── */
-  .section { padding:100px 60px; }
+  /* ─── SHARED ─── */
   .section-tag {
     font-size:11px; font-weight:500; letter-spacing:0.3em;
     text-transform:uppercase; color:var(--sage);
@@ -181,178 +189,148 @@
   }
   h2.section-title em { font-style:italic; color:var(--moss); }
   .body-text { font-size:16px; font-weight:300; line-height:1.85; color:rgba(13,26,15,0.6); }
-
-  /* ─── SERVICES SPLIT ─── */
-  .services-section { background:var(--white); }
-  .split-block {
-    display:grid !important;
-    grid-template-columns:1fr 1fr !important;
-    gap:0;
-    align-items:center;
-    background:var(--cream);
-    width:100%;
-    padding:60px;
+  .btn {
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'Jost',sans-serif; font-size:13px; font-weight:500;
+    letter-spacing:0.08em; text-transform:uppercase;
+    text-decoration:none; border-radius:2px;
+    transition:all 0.3s; cursor:pointer; border:none;
   }
-  .split-block.reverse { direction:rtl; }
-  .split-block.reverse > * { direction:ltr; }
-  .split-img {
-    position:relative; overflow:hidden; min-height:60px; background:var(--forest);
-    display:block;
-    width:100% !important;
-    max-width:180% !important;
-    border-radius:16px;
-    border-shadow:0 50px 50px rgba(0,0,0,0.2);
-  }
-.split-img img {
-    width:100%; height:100%; object-fit:cover; display:block;
-    position:absolute; top:0; left:0; bottom:0; right:0;
-    transition:transform 0.8s ease;
-    object-position:center
-  }
-  .split-block:hover .split-img img { transform:scale(1.04); }
-  .split-content {
-    padding:80px 70px;
-    display:flex; flex-direction:column; justify-content:center;
-    background:var(--cream);
-    align-self:stretch;
-  }
-  .split-content.dark { background:var(--forest); }
-  .split-content.dark .section-tag { color:rgba(255,255,255,0.4); }
-  .split-content.dark .section-tag::before { background:rgba(255,255,255,0.3); }
-  .split-content.dark h2.section-title { color:#fff; }
-  .split-content.dark h2.section-title em { color:var(--amber); }
-  .split-content.dark .body-text { color:rgba(255,255,255,0.55); }
-  .split-content p+p { margin-top:16px; }
-  .split-content .btn { margin-top:40px; align-self:flex-start; }
   .btn-forest { background:var(--moss); color:#fff; padding:14px 34px; }
   .btn-forest:hover { background:var(--forest); transform:translateY(-2px); }
   .btn-gold-outline { background:transparent; color:var(--gold); padding:14px 34px; border:1px solid var(--gold); }
   .btn-gold-outline:hover { background:var(--gold); color:var(--ink); transform:translateY(-2px); }
+  .btn-dark { background:var(--ink); color:var(--amber); padding:16px 44px; white-space:nowrap; transition:background 0.3s,transform 0.2s; }
+  .btn-dark:hover { background:var(--forest); transform:translateY(-2px); }
 
-  /* ─── SERVICES CARDS ─── */
-  .services-cards {
-    display:grid; grid-template-columns:repeat(3,1fr);
-    gap:1px; background:rgba(13,26,15,0.08); margin-top:1px;
+  /* ─── SERVICES SPLIT ─── */
+  .services-split {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    background:var(--cream);
+    padding:60px;
+    align-items:center;
   }
-  .svc-card {
-    background:var(--white); padding:52px 44px;
-    cursor:pointer; transition:all 0.4s; position:relative; overflow:hidden;
+  .services-split-img {
+    display:flex; align-items:center; justify-content:center;
   }
-  .svc-card::after {
-    content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
-    background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s;
+  .services-split-img img {
+    width:80%; height:280px; object-fit:cover;
+    border-radius:16px; box-shadow:0 20px 50px rgba(0,0,0,0.2); display:block;
   }
-  .svc-card:hover { background:var(--forest); }
-  .svc-card:hover::after { transform:scaleX(1); }
-  .svc-num { font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--sage); margin-bottom:28px; transition:color 0.4s; font-weight:500; }
-  .svc-card:hover .svc-num { color:rgba(255,255,255,0.4); }
-  .svc-icon { width:40px; height:40px; margin-bottom:24px; opacity:0.6; }
-  .svc-title { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:600; line-height:1.2; color:var(--ink); margin-bottom:14px; transition:color 0.4s; }
-  .svc-card:hover .svc-title { color:var(--amber); }
-  .svc-desc { font-size:14px; font-weight:300; line-height:1.75; color:rgba(13,26,15,0.5); transition:color 0.4s; }
-  .svc-card:hover .svc-desc { color:rgba(255,255,255,0.55); }
-  .svc-more { margin-top:28px; display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); opacity:0; transform:translateX(-8px); transition:all 0.4s; text-decoration:none; }
-  .svc-card:hover .svc-more { opacity:1; transform:translateX(0); }
+  .services-split-content {
+    display:flex; flex-direction:column; justify-content:center;
+  }
+
+  /* ─── ACHIEVEMENTS ─── */
+  .achievements-section {
+    background:#0D1A0F; padding:100px 60px;
+    position:relative; overflow:hidden;
+  }
+  .achievements-section::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse 50% 60% at 80% 50%, rgba(46,94,56,0.18) 0%, transparent 65%);
+    pointer-events:none;
+  }
+  .achievements-inner {
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+  }
+  .metrics-grid {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:1px; background:rgba(255,255,255,0.06);
+  }
+  .metric-cell { background:#0D1A0F; padding:36px 28px; }
+  .metric-num {
+    font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:700;
+    color:#D4A84B; line-height:1; margin-bottom:10px;
+  }
+  .metric-label {
+    font-size:12px; font-weight:400; letter-spacing:0.06em;
+    color:rgba(255,255,255,0.4); line-height:1.6;
+  }
 
   /* ─── TEAM SECTION ─── */
-  .team-section { background:var(--sand); }
-  .team-intro { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end; margin-bottom:64px; }
-  .team-right-text { font-size:16px; font-weight:300; line-height:1.85; color:rgba(13,26,15,0.55); padding-top:8px; }
-  .team-card { display:grid; grid-template-columns:2fr 3fr; background:var(--white); box-shadow:0 6px 40px rgba(13,26,15,0.08); overflow:hidden; transition:box-shadow 0.4s,transform 0.4s; }
-  .team-card:hover { transform:translateY(-4px); box-shadow:0 20px 60px rgba(13,26,15,0.12); }
-  .team-photo { background:linear-gradient(160deg,var(--forest),var(--moss)); min-height:400px; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:24px; }
-  .team-photo-bg { position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 30%, rgba(90,138,101,0.3) 0%, transparent 70%); }
-  .team-initial { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Cormorant Garamond',serif; font-size:120px; font-weight:700; color:rgba(255,255,255,0.08); line-height:1; user-select:none; }
-  .team-badge { position:relative; z-index:1; background:rgba(13,26,15,0.65); backdrop-filter:blur(6px); padding:6px 14px; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); }
-  .team-info { padding:56px 52px; display:flex; flex-direction:column; justify-content:center; }
-  .team-role { font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--sage); margin-bottom:10px; font-weight:500; }
-  .team-name { font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:700; color:var(--ink); line-height:1; margin-bottom:24px; }
-  .team-bio { font-size:14px; font-weight:300; line-height:1.85; color:rgba(13,26,15,0.55); }
-  .team-bio+.team-bio { margin-top:12px; }
-  .team-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
-  .tag { background:rgba(46,94,56,0.08); border:1px solid rgba(46,94,56,0.15); color:var(--moss); font-size:11px; letter-spacing:0.06em; padding:5px 12px; font-weight:400; }
+  .team-section { background:var(--sand); padding:100px 60px; }
+  .team-grid {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:80px; align-items:center; margin-bottom:64px;
+  }
 
   /* ─── VISION SECTION ─── */
   .vision-section { background:var(--ink); padding:130px 60px; position:relative; overflow:hidden; }
   .vision-section::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 60% at 80% 50%, rgba(46,94,56,0.18) 0%, transparent 65%), radial-gradient(ellipse 30% 40% at 10% 80%, rgba(191,140,58,0.07) 0%, transparent 60%); }
-  .vision-inner { position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center; }
+  .vision-inner { position:relative; z-index:1; max-width:700px; }
   .vision-section .section-tag { color:var(--amber); }
   .vision-section .section-tag::before { background:var(--amber); }
   .vision-section h2.section-title { color:#fff; margin-top:6px; }
   .vision-section h2.section-title em { color:var(--amber); }
   .vision-section .body-text { color:rgba(255,255,255,0.5); margin-top:28px; }
   .vision-section .body-text strong { color:rgba(255,255,255,0.85); font-weight:400; }
-  .vision-pull { border-left:2px solid var(--gold); padding:32px 40px; background:rgba(191,140,58,0.07); margin-bottom:40px; }
-  .vision-pull-q { font-family:'Cormorant Garamond',serif; font-size:26px; font-style:italic; font-weight:400; line-height:1.5; color:rgba(255,255,255,0.85); }
-  .locations { display:flex; flex-direction:column; gap:12px; }
-  .loc { display:flex; align-items:center; gap:14px; font-size:12px; letter-spacing:0.06em; color:rgba(255,255,255,0.3); }
-  .loc-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; }
 
   /* ─── CONTACT CTA ─── */
   .contact-cta { background:var(--gold); padding:90px 60px; display:flex; justify-content:space-between; align-items:center; gap:48px; }
   .contact-cta h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(34px,4.5vw,60px); font-weight:700; color:var(--ink); line-height:1.05; }
-  .btn-dark { background:var(--ink); color:var(--amber); padding:16px 44px; white-space:nowrap; transition:background 0.3s,transform 0.2s; }
-  .btn-dark:hover { background:var(--forest); transform:translateY(-2px); }
 
+  /* ─── FOOTER ─── */
   footer {
-    background:var(--ink);
-    padding:48px 60px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    gap:24px;
+    background:var(--ink); padding:48px 60px;
+    display:flex; flex-direction:column;
+    justify-content:center; align-items:center;
+    text-align:center; gap:24px;
     border-top:1px solid rgba(255,255,255,0.05);
   }
-.footer-brand { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--amber); letter-spacing:0.04em; margin-bottom:6px; }
-.footer-info { font-size:12px; font-weight:300; color:rgba(255,255,255,0.25); line-height:1.9; letter-spacing:0.04em; }
-.footer-nav { display:flex; gap:28px; flex-wrap:wrap; justify-content:center; }
-.footer-nav a { font-size:12px; font-weight:400; letter-spacing:0.08em; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.3s; text-transform:uppercase; }
-.footer-nav a:hover { color:var(--amber); }
-
-/* ─── WAVE DIVIDERS ─── */
-  .wave-divider {
-    display:block;
-    width:100%;
-    overflow:hidden;
-    line-height:0;
-  }
-  .wave-divider svg {
-    display:block;
-    width:100%;
-  }
+  .footer-brand { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--amber); letter-spacing:0.04em; margin-bottom:6px; }
+  .footer-info { font-size:12px; font-weight:300; color:rgba(255,255,255,0.25); line-height:1.9; letter-spacing:0.04em; }
+  .footer-nav { display:flex; gap:28px; flex-wrap:wrap; justify-content:center; }
+  .footer-nav a { font-size:12px; font-weight:400; letter-spacing:0.08em; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.3s; text-transform:uppercase; }
+  .footer-nav a:hover { color:var(--amber); }
 
   /* ─── TABLET ─── */
-@media(max-width:1024px) and (min-width:601px){
+  @media(max-width:1024px) and (min-width:601px){
     header { padding:0 24px; }
+    nav { display:flex; }
+    .hamburger { display:none; }
     .hero { height:55vw; min-height:300px; }
     .intro-band { padding:48px 24px; }
+    .services-split { grid-template-columns:1fr; padding:40px 24px; }
+    .services-split-img img { width:100%; height:240px; }
+    .achievements-section { padding:72px 24px; }
+    .achievements-inner { grid-template-columns:1fr; gap:40px; }
     .team-section { padding:64px 24px; }
-    .split-block, .team-intro, .vision-inner, .team-card, .contact-cta { grid-template-columns:1fr; }
-    .split-img { min-height:280px; }
-    .services-cards { grid-template-columns:1fr 1fr; }
-    footer { flex-direction:column; align-items:flex-start; padding:40px 24px; }
-    nav { display:flex; }
+    .team-grid { grid-template-columns:1fr; gap:40px; }
+    .vision-section { padding:80px 24px; }
+    .contact-cta { flex-direction:column; align-items:flex-start; padding:60px 24px; }
+    footer { padding:40px 24px; }
   }
 
-/* ─── MOBILE ─── */
-@media(max-width:600px){
+  /* ─── MOBILE ─── */
+  @media(max-width:600px){
     header { padding:0 24px; }
-    .hero { height:55vw; min-height:300px; }
-    .intro-band { padding:48px 24px; }
-    .team-section { padding:64px 24px; }
-    .split-block, .team-intro, .vision-inner, .team-card, .contact-cta { grid-template-columns:1fr; }
-    .split-img { min-height:280px; }
-    .services-cards { grid-template-columns:1fr; }
-    footer { flex-direction:column; align-items:flex-start; padding:40px 24px; }
     nav { display:none; }
+    .hamburger { display:flex; }
+    .hero { height:60vw; min-height:280px; }
+    .hero-h1 { font-size:clamp(36px,10vw,60px); }
+    .hero-sub { font-size:14px; }
+    .intro-band { padding:40px 24px; }
+    .services-split { grid-template-columns:1fr; padding:32px 24px; gap:24px; }
+    .services-split-img img { width:100%; height:200px; }
+    .achievements-section { padding:60px 24px; }
+    .achievements-inner { grid-template-columns:1fr; gap:40px; }
+    .metrics-grid { grid-template-columns:1fr 1fr; }
+    .metric-num { font-size:36px; }
+    .team-section { padding:60px 24px; }
+    .team-grid { grid-template-columns:1fr; gap:32px; }
+    .vision-section { padding:60px 24px; }
+    .contact-cta { flex-direction:column; align-items:flex-start; padding:48px 24px; gap:24px; }
+    footer { padding:40px 24px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ══ HEADER — static, sits above the hero ══ -->
+<!-- ══ HEADER ══ -->
 <header>
   <a href="index.html" class="nav-logo">
     <img src="images/logo.png" alt="WDA Lab" style="height:48px;width:auto;object-fit:contain;border-radius:12%;">
@@ -364,7 +342,7 @@
         <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </button>
       <div class="dropdown">
-        <a href="index.html">Home</a>
+        <a href="services.html">Overview of Services</a>
         <a href="services.html#annotation">High-Fidelity Annotation</a>
         <a href="services.html#data">Data Entry &amp; Management</a>
         <a href="services.html#analysis">Data Analysis</a>
@@ -383,46 +361,64 @@
     </div>
     <a href="contact.html" class="nav-link nav-cta">Contact Us</a>
   </nav>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </header>
 
-<!-- ══ HERO — contained image block below header ══ -->
+<!-- ══ MOBILE NAV ══ -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <p class="mobile-nav-section">Services</p>
+  <a href="services.html">Overview of Services</a>
+  <a href="services.html#annotation">High-Fidelity Annotation</a>
+  <a href="services.html#data">Data Entry &amp; Management</a>
+  <a href="services.html#analysis">Evidence-Based Analysis</a>
+  <p class="mobile-nav-section">About</p>
+  <a href="team.html">Our Team</a>
+  <a href="story.html">Our Story</a>
+  <a href="vision.html">Our Vision</a>
+  <a href="achievements.html">Achievements</a>
+  <a href="contact.html">Contact Us</a>
+</div>
+
+<!-- ══ HERO ══ -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
     <h1 class="hero-h1"><em>WildData<br>Annotation Lab</em></h1>
-    <p class="hero-sub">
-      Turning complex wildlife data into accurate ecosystem intelligence. The precision layer between raw environmental data and real conservation impact.
-    </p>
+    <p class="hero-sub">Turning complex wildlife data into accurate ecosystem intelligence. The precision layer between raw environmental data and real conservation impact.</p>
   </div>
 </section>
 
-<!-- ══ INTRO TEXT BAND ══ -->
+<!-- ══ INTRO BAND ══ -->
 <div class="intro-band">
   <p>WDA-Lab provides <em>transparent and rigorous</em> wildlife data services — delivered by field-trained specialists across Africa's most significant ecosystems.</p>
 </div>
 
+<!-- wave -->
 <div style="background:#F6F2EA;padding:30px 0;line-height:0;">
   <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
     <path d="M0,60 C360,10 720,75 1080,15 C1260,0 1380,50 1440,20" fill="none" stroke="#1B3A22" stroke-width="2.5"/>
   </svg>
 </div>
 
-<!-- ══ SERVICES INTRO SPLIT ══ -->
-<section class="section services-section" style="padding:0;">
-  <!-- ══ SERVICES SPLIT ══ -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--cream);padding:60px;align-items:center;">
-  <div style="padding-right:0px;display:flex;align-items:center;justify-content:center;">
-    <img src="images/secretary.jpg" alt="Wildlife" style="width:60%;height:280px;object-fit:cover;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.2);display:block;">
+<!-- ══ SERVICES SPLIT ══ -->
+<div class="services-split">
+  <div class="services-split-img">
+    <img src="images/secretary.jpg" alt="Wildlife Services">
   </div>
-  <div style="display:flex;flex-direction:column;justify-content:center;">
+  <div class="services-split-content">
     <p class="section-tag">Our Services</p>
     <h2 class="section-title">From raw data to <em>research-ready</em> insights</h2>
     <p class="body-text" style="margin-top:24px;">Our team specializes in high-fidelity wildlife annotation, systematic data management, and evidence-based ecological analysis. Whether you're building a species database or preparing findings for policy and publication, WDA Lab provides the precision and rigor your conservation work demands.</p>
     <a href="services.html" class="btn btn-forest" style="margin-top:40px;align-self:flex-start;">Learn more →</a>
   </div>
 </div>
-</section>
 
+<!-- wave -->
 <div style="background:#FDFCF9;padding:30px 0;line-height:0;">
   <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
     <path d="M0,10 C360,75 720,5 1080,70 C1260,80 1380,20 1440,50" fill="none" stroke="#D4A84B" stroke-width="2.5"/>
@@ -430,11 +426,8 @@
 </div>
 
 <!-- ══ ACHIEVEMENTS ══ -->
-<section style="background:#0D1A0F;padding:100px 60px;position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 80% 50%, rgba(46,94,56,0.18) 0%, transparent 65%);pointer-events:none;"></div>
-  <div style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-
-    <!-- LEFT: intro text -->
+<section class="achievements-section">
+  <div class="achievements-inner">
     <div>
       <p style="font-size:11px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:#D4A84B;display:flex;align-items:center;gap:14px;margin-bottom:18px;">
         <span style="display:block;width:28px;height:1px;background:#D4A84B;"></span>
@@ -446,44 +439,32 @@
       <p style="font-size:16px;font-weight:300;line-height:1.85;color:rgba(255,255,255,0.55);margin-bottom:40px;">
         From the vast floodplains of the Kavango-Zambezi to the seasonal migrations of Boma-Badingilo, WDA-Lab has delivered structured, analysis-ready data that empowers researchers, protected area managers, and conservation NGOs to make evidence-backed decisions with confidence.
       </p>
-      <a href="achievements.html" style="display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;background:transparent;color:#D4A84B;padding:14px 34px;border:1px solid #D4A84B;transition:all 0.3s;">
+      <a href="achievements.html" style="display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;background:transparent;color:#D4A84B;padding:14px 34px;border:1px solid #D4A84B;">
         View Our Impact →
       </a>
     </div>
-
-    <!-- RIGHT: metrics -->
-    <div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.06);">
-        <div style="background:#0D1A0F;padding:36px 28px;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#D4A84B;line-height:1;margin-bottom:10px;">
-            <span class="count-up" data-target="1000000" data-suffix="M+" data-divide="1000000">0</span>
-          </div>
-          <div style="font-size:12px;font-weight:400;letter-spacing:0.06em;color:rgba(255,255,255,0.4);line-height:1.6;">Wildlife images annotated & quality-checked</div>
-        </div>
-        <div style="background:#0D1A0F;padding:36px 28px;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#D4A84B;line-height:1;margin-bottom:10px;">
-            <span class="count-up" data-target="5" data-suffix="">0</span>
-          </div>
-          <div style="font-size:12px;font-weight:400;letter-spacing:0.06em;color:rgba(255,255,255,0.4);line-height:1.6;">Countries supported across sub-Saharan Africa</div>
-        </div>
-        <div style="background:#0D1A0F;padding:36px 28px;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#D4A84B;line-height:1;margin-bottom:10px;">
-            <span class="count-up" data-target="3" data-suffix="">0</span>
-          </div>
-          <div style="font-size:12px;font-weight:400;letter-spacing:0.06em;color:rgba(255,255,255,0.4);line-height:1.6;">Data entry & management projects completed</div>
-        </div>
-        <div style="background:#0D1A0F;padding:36px 28px;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#D4A84B;line-height:1;margin-bottom:10px;">
-            <span class="count-up" data-target="4" data-suffix="+">0</span>
-          </div>
-          <div style="font-size:12px;font-weight:400;letter-spacing:0.06em;color:rgba(255,255,255,0.4);line-height:1.6;">Leading conservation partners across Africa</div>
-        </div>
+    <div class="metrics-grid">
+      <div class="metric-cell">
+        <div class="metric-num"><span class="count-up" data-target="1000000" data-suffix="M+" data-divide="1000000">0</span></div>
+        <div class="metric-label">Wildlife images annotated & quality-checked</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num"><span class="count-up" data-target="5" data-suffix="">0</span></div>
+        <div class="metric-label">Countries supported across sub-Saharan Africa</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num"><span class="count-up" data-target="3" data-suffix="">0</span></div>
+        <div class="metric-label">Data entry & management projects completed</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num"><span class="count-up" data-target="4" data-suffix="+">0</span></div>
+        <div class="metric-label">Leading conservation partners across Africa</div>
       </div>
     </div>
-
   </div>
 </section>
 
+<!-- wave -->
 <div style="background:#0D1A0F;padding:30px 0;line-height:0;">
   <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
     <path d="M0,70 C360,5 720,80 1080,10 C1260,0 1380,60 1440,25" fill="none" stroke="#D4A84B" stroke-width="2.5"/>
@@ -492,47 +473,41 @@
 
 <!-- ══ TEAM ══ -->
 <section class="team-section">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:64px;">
-
-    <!-- LEFT: text + button -->
+  <div class="team-grid">
     <div>
       <p class="section-tag">Our Team</p>
       <h2 class="section-title">The people behind<br><em>the precision</em></h2>
       <p class="body-text" style="margin-top:24px;">WDA-Lab is not a faceless data company. We are a team of field-trained wildlife specialists, data professionals, and conservation practitioners who have worked across some of Africa's most demanding and ecologically significant projects. Our work is precise because our people understand what is at stake.</p>
-      <div class="body-text">
-        <p> <strong>We do not just process wildlife data. We understand it.</strong> </p>
-      </div>
+      <p class="body-text" style="margin-top:16px;"><strong>We do not just process wildlife data. We understand it.</strong></p>
       <a href="team.html" class="btn btn-forest" style="margin-top:36px;display:inline-flex;">Meet our team →</a>
     </div>
-
-    <!-- RIGHT: photo -->
     <div>
       <img src="images/cheetah.jpg" alt="WDA Lab Team" style="width:100%;height:420px;object-fit:cover;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.15);display:block;">
     </div>
   </div>
 </section>
 
+<!-- wave -->
 <div style="background:#E8DCC8;padding:30px 0;line-height:0;">
   <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
     <path d="M0,15 C360,75 720,5 1080,65 C1260,78 1380,10 1440,40" fill="none" stroke="#1B3A22" stroke-width="2.5"/>
   </svg>
 </div>
 
-<!-- ══ VISION SECTION ══ -->
+<!-- ══ VISION ══ -->
 <section class="vision-section">
   <div class="vision-inner">
-    <div>
-      <p class="section-tag">Vision</p>
-      <h2 class="section-title">Transforming wildlife data into <em>conservation impact</em></h2>
-      <div class="body-text">
-        <p>Wildlife populations are declining at an unprecedented rate. Yet the organizations working hardest to reverse it are often held back by <strong>fragmented, inconsistent, and unmanageable data</strong> that delays decisions and undermines the credibility of conservation efforts.</p>
-        <p style="margin-top:20px;">At WDA-Lab, we saw this gap and made it our purpose to close it — working alongside researchers and conservation organizations worldwide, providing the data precision, structure, and analysis they need to move from raw field information to <strong>confident, evidence-backed action.</strong></p>
-      </div>
-      <a href="vision.html" class="btn btn-gold-outline" style="margin-top:40px;">Read our vision →</a>
+    <p class="section-tag">Vision</p>
+    <h2 class="section-title">Transforming wildlife data into <em>conservation impact</em></h2>
+    <div class="body-text">
+      <p>Wildlife populations are declining at an unprecedented rate. Yet the organizations working hardest to reverse it are often held back by <strong>fragmented, inconsistent, and unmanageable data</strong> that delays decisions and undermines the credibility of conservation efforts.</p>
+      <p style="margin-top:20px;">At WDA-Lab, we saw this gap and made it our purpose to close it — working alongside researchers and conservation organizations worldwide, providing the data precision, structure, and analysis they need to move from raw field information to <strong>confident, evidence-backed action.</strong></p>
     </div>
+    <a href="vision.html" class="btn btn-gold-outline" style="margin-top:40px;">Read our vision →</a>
   </div>
 </section>
 
+<!-- wave -->
 <div style="background:#0D1A0F;padding:30px 0;line-height:0;">
   <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
     <path d="M0,50 C360,5 720,75 1080,10 C1260,0 1380,65 1440,30" fill="none" stroke="#D4A84B" stroke-width="2.5"/>
@@ -547,54 +522,74 @@
 
 <!-- ══ FOOTER ══ -->
 <footer>
-  <div style="text-align:center;">
+  <div>
+    <div class="footer-brand">WDA Lab</div>
     <div class="footer-info">
       P.O. Box 2123, Arusha, Tanzania &nbsp;|&nbsp; +255 (0) 71 724 0523 &nbsp;|&nbsp; info@wda-lab.com &nbsp;|&nbsp; Reg. No. 631498
     </div>
   </div>
   <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="team.html">Team</a>
+    <a href="story.html">Our Story</a>
+    <a href="vision.html">Vision</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="contact.html">Contact</a>
     <a href="privacy.html" style="text-transform:capitalize;">Privacy Policy</a>
   </nav>
-  <div class="footer-info" style="margin-top:8px;">&copy; 2026 WDA-Lab. All rights reserved.</div>
+  <div class="footer-info">&copy; 2026 WDA-Lab. All rights reserved.</div>
 </footer>
 
 <script>
-  // Subtle scroll shadow on header
-  const header = document.getElementById('header') || document.querySelector('header');
+  // Header scroll shadow
+  const header = document.querySelector('header');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) {
-      header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
-    } else {
-      header.style.boxShadow = 'none';
-    }
+    header.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.3)' : 'none';
   });
-  // Count-up animation triggered when section scrolls into view
-const countEls = document.querySelectorAll('.count-up');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target.dataset.done) {
-      entry.target.dataset.done = true;
-      const el = entry.target;
-      const target = parseInt(el.dataset.target);
-      const suffix = el.dataset.suffix || '';
-      const divide = parseInt(el.dataset.divide) || 1;
-      const duration = 2000;
-      const steps = 60;
-      const increment = target / steps;
-      let current = 0;
-      let step = 0;
-      const timer = setInterval(() => {
-        step++;
-        current = Math.min(increment * step, target);
-        const display = divide > 1 ? (current / divide).toFixed(1) : Math.floor(current);
-        el.textContent = display + suffix;
-        if (step >= steps) clearInterval(timer);
-      }, duration / steps);
-    }
-  });
-}, { threshold: 0.3 });
 
-countEls.forEach(el => observer.observe(el));
+  // Hamburger menu toggle
+  function toggleMenu() {
+    const nav = document.getElementById('mobileNav');
+    const isOpen = nav.style.display === 'flex';
+    nav.style.display = isOpen ? 'none' : 'flex';
+  }
+
+  // Close mobile menu when a link is clicked
+  document.querySelectorAll('.mobile-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobileNav').style.display = 'none';
+    });
+  });
+
+  // Count-up animation
+  window.addEventListener('load', function() {
+    const countEls = document.querySelectorAll('.count-up');
+    if (!countEls.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.done) {
+          entry.target.dataset.done = 'true';
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          const divide = parseInt(el.dataset.divide) || 1;
+          const duration = 2000;
+          const steps = 60;
+          const increment = target / steps;
+          let step = 0;
+          const timer = setInterval(() => {
+            step++;
+            const current = Math.min(increment * step, target);
+            const display = divide > 1 ? (current / divide).toFixed(1) : Math.floor(current);
+            el.textContent = display + suffix;
+            if (step >= steps) clearInterval(timer);
+          }, duration / steps);
+        }
+      });
+    }, { threshold: 0.3 });
+    countEls.forEach(el => observer.observe(el));
+  });
 </script>
 </body>
 </html>
